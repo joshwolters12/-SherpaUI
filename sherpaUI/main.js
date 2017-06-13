@@ -1,6 +1,7 @@
-import { app, BrowserWindow } from 'electron';
-
+import { app, BrowserWindow, dialog } from 'electron';
+// const dialog = require('electron').remote
 const exec = require('child_process').exec;
+const fs = require('fs')
 let mainWindow = null;
 
 app.on('window-all-closed', () => {
@@ -18,6 +19,32 @@ app.on('ready', () => {
   setTimeout(function() {
     mainWindow.loadURL('file://' + __dirname + '/index.html',);
   }, 500)
+
+
+
+
+
+  dialog.showOpenDialog({
+    //only allow image files to be selected
+    filters: [
+      {
+        name: 'Images',
+        extensions: ['jpg', 'png', 'gif']
+      }
+
+    ]
+  }, function(fileNames) {
+    //isolate filename to update rendered image in ReactVR
+    if (fileNames === undefined) return;
+    console.log(fileNames[0].split("/").pop())
+    let imageToLoad = fileNames[0].split("/").pop()
+
+  });
+
+
+
+
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
