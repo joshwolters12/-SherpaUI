@@ -6,20 +6,52 @@ export default class Main extends Component {
   constructor() {
     super();
     this.state = {
-      selected: 1
+        imageURL: "chess-world.jpg",
+        currView: "front",
+        front: {
+          title: "Hello World",
+          text: "This is the starting text for the front view",
+          navleft: "Left",
+          navright: "Right"
+        },
+        back: {
+          title: "Looking Back",
+          text: "Heyooooo",
+          navleft: "Right",
+          navright: "Left"
+        },
+        left: {
+          title: "Looking Left",
+          text: "Watcha gonna do about it",
+          navleft: "Back",
+          navright: "Front"
+        },
+        right: {
+          title: "Looking Right",
+          text: "Teaaaaam Misfits!",
+          navleft: "Front",
+          navright: "Back"
+        }
+      }
+      this.selectPage = this.selectPage.bind(this)
+    }
+
+    selectPage(page) {
+        this.setState({currView: page});
+    }
+
+    render() {
+      return (
+        <div id='appcontainer' style={styles.appcontainer}>
+          <div id="headspacer" style={styles.header}></div>
+          <Gui 
+            data={this.state}
+            selectPage={this.selectPage}></Gui>
+          <div id="footer" style={styles.footer}></div>
+        </div>
+      );
     }
   }
-
-  render() {
-    return (
-      <div id='appcontainer' style={styles.appcontainer}>
-        <div id="headspacer" style={styles.header}></div>
-        <Gui></Gui>
-        <div id="footer" style={styles.footer}></div>
-      </div>
-    );
-  }
-}
 
 let styles = {
   appcontainer: {
@@ -31,12 +63,12 @@ let styles = {
   },
   header: {
     height: "2%",
-    minHeight:'15px',
+    minHeight: '15px',
     flex: '[1 0 5%]',
   },
   footer: {
     height: '8%',
-    minHeight:'50px',
+    minHeight: '50px',
     flex: '[1 0 10%]',
   }
 }

@@ -5,7 +5,7 @@ class CoordinatesAndScaling extends Component {
     render() {
         return (
             <div style={styles.properties}>
-                <Attribute/>
+                <Attribute data={this.props.data}/>
             </div>
         )
     }
@@ -14,7 +14,7 @@ class CoordinatesAndScaling extends Component {
 let styles = {
     properties: {
         width: '90%',
-        height: '20%',
+        height: 'auto',
         margin: '10px auto'
     }
 }

@@ -4,7 +4,7 @@ class Page extends Component {
     constructor() {
         super()
         this.state = {
-            opacity: '0.5'
+            opacity: '0.75'
         }
     }
 
@@ -13,13 +13,13 @@ class Page extends Component {
             page: {
                 height: '22%',
                 width: '85%',
-                backgroundColor: '#1e2538',
+                backgroundColor: (this.props.page === this.props.currView) ? '#707f9c' : '#1e2538',
                 margin: 'auto',
                 borderRadius: '2px',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                color: '#bdc2d8',
+                color: (this.props.page === this.props.currView) ? 'white' : '#707f9c',
                 fontSize: '16px',
                 opacity: this.state.opacity,
                 cursor: 'hand'
@@ -28,10 +28,11 @@ class Page extends Component {
 
         return (
             <div style={styles.page}
-            onMouseEnter={()=>this.setState({opacity: '0.75'})}
-            onMouseLeave={()=>this.setState({opacity: '0.5'})}
+                onMouseEnter={() => this.setState({ opacity: '1' })}
+                onMouseLeave={() => this.setState({ opacity: '0.75' })}
+                onClick={() => this.props.selectPage(this.props.page)}
             >
-                Update View
+                {this.props.name}
             </div>
         )
     }
