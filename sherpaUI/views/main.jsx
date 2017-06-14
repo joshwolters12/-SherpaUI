@@ -34,10 +34,18 @@ export default class Main extends Component {
         }
       }
       this.selectPage = this.selectPage.bind(this)
+      this.updateProperties = this.updateProperties.bind(this)
     }
 
     selectPage(page) {
         this.setState({currView: page});
+    }
+    
+    updateProperties(event){
+        let newState = this.state
+        console.log('newState',newState)
+        newState[this.state.currView][event.target.name] = event.target.value;
+        this.setState(newState)
     }
 
     render() {
@@ -46,7 +54,9 @@ export default class Main extends Component {
           <div id="headspacer" style={styles.header}></div>
           <Gui 
             data={this.state}
-            selectPage={this.selectPage}></Gui>
+            selectPage={this.selectPage}
+            updateProperties = {this.updateProperties}
+            ></Gui>
           <div id="footer" style={styles.footer}></div>
         </div>
       );

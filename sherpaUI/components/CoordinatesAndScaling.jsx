@@ -5,7 +5,10 @@ class CoordinatesAndScaling extends Component {
     render() {
         return (
             <div style={styles.properties}>
-                <Attribute data={this.props.data}/>
+                <Attribute 
+                data={this.props.data}
+                updateProperties = {this.props.updateProperties}
+                />
             </div>
         )
     }
