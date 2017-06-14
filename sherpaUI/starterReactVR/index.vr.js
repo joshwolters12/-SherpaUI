@@ -3,7 +3,7 @@ import { AppRegistry, asset, Pano, View, Text, StyleSheet, Plane, Scene } from '
 import Frame from './frame.vr.js';
 import data from './obj.js';
 
-const width = 10;
+const width = 3;
 
 export default class starterReactVR extends Component {
   constructor() {
@@ -13,43 +13,43 @@ export default class starterReactVR extends Component {
 
   render() {
     return (
-      // <Scene>
+      <View>
+
+        <Pano source={asset(this.state.image)}></Pano>
+
         <View style={styles.container}>
-          <Pano source={asset('winter-outdoor.jpg')}></Pano>
-          <Plane
-            text={'idk this is text'}
-            style={{color: 'black',
-                    transform: [{translate: [-width/2, 0, -3]}]
-                  }}
-            dimWidth={1}
-            dimHeight={1}
-          />
-          <Plane
-            text={'idk this is text'}
-            style={{color: 'blue',
-                    transform: [{translate: [-width/2, 0, -3]}]
-                  }}
-            dimWidth={1}
-            dimHeight={1}
-            wireFrame={true}
-          />
-          <Frame text={this.state.front.text} translate={[-width/2, 0, -3]} rotateY={0}/>
-          <Frame text={this.state.right.text} translate={[-width/2, .125, -3]} rotateY={-90}/> 
-          <Frame text={this.state.back.text} translate={[-width/2, .25, -3]} rotateY={180}/>
-          <Frame text={this.state.left.text} translate={[-width/2, .375, -3]} rotateY={90}/>
+          <Frame text={this.state.front.text} translate={[-width/2, 0, -5]} rotateY={0}/> 
         </View>
-      // </Scene>
+
+        <View style={styles.container}>
+          <Frame text={this.state.right.text} translate={[5-width/2, 0, 0]} rotateY={-90}/> 
+        </View>
+
+        <View style={styles.container}>
+          <Frame text={this.state.back.text} translate={[-width/2, 0, 5]} rotateY={180}/>
+        </View>
+
+        <View style={styles.container}>
+          <Frame text={this.state.left.text} translate={[-5-width/2, 0, 0]} rotateY={90}/>
+        </View>
+
+      </View>
     )
   }
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    position: 'absolute',
     width: width,
-    alignItems: 'center',
+    // height: 10,
+    // textAlign: 'center',
+    justifyContent: 'center',
+    // backgroundColor: 'blue',
+    // alignItems: 'center',
     flexDirection: 'row',
-    alignItems: 'stretch'
+    // justifyContent: 'flex-start'
+    // margin: 'none'
   }
 })
 
