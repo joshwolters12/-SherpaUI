@@ -2,39 +2,73 @@ import React, { Component } from 'react';
 import { TextInput } from 'react-desktop/macOs';
 
 class Attribute extends Component {
+    constructor() {
+        super()
+        this.state = {
+            backgroundColor: '#bdc2d8',
+            color: '#1e2538',
+        }
+    }
+
     render() {
-        let currentView = (this.props.data.currView) ? this.props.data.currView : null;
-        let currentViewProps = (currentView) ? this.props.data[currentView] : {};
-        console.log(currentViewProps)
+        let button = {
+            width: '120px',
+            height: '30px',
+            color: this.state.color,
+            backgroundColor: this.state.backgroundColor,
+            borderColorBottom: 'black',
+            borderColorRight: 'black',
+            borderRadius: '3px',
+            margin: '0 auto'
+        }
         return (
             <div style={styles.attributeContainer}>
                 Title
                 <form style={styles.form}>
                     <label style={styles.label}>Title</label>
-                    <textarea style={styles.inputLarge} type="text" wrap="soft" value={currentViewProps.title}/>
+                    <textarea style={styles.inputLarge}
+                        type="text"
+                        wrap="soft"
+                        name="title"
+                        value={this.props.data[this.props.data.currView].title}
+                        onChange={this.props.updateProperties}/>
                 </form>
-                {/*<form style={styles.form}>
-                    <label style={styles.label}>Size</label>
-                    <input style={styles.inputSmall} type="text" wrap="soft" />
-                </form>*/}
                 Paragraph
                 <form style={styles.form}>
                     <label style={styles.label}>Text</label>
-                    <textarea style={styles.inputLarge} type="text" wrap="soft" value={currentViewProps.text}/>
+                    <textarea style={styles.inputLarge}
+                        type="text"
+                        wrap="soft"
+                        name="text"
+                        value={this.props.data[this.props.data.currView].text}
+                        onChange={this.props.updateProperties}/>
                 </form>
-                {/*<form style={styles.form}>
-                    <label style={styles.label}>Size</label>
-                    <input style={styles.inputSmall} type="text" wrap="soft" />
-                </form>*/}
                 Navigation
                 <form style={styles.form}>
                     <label style={styles.label}>Left</label>
-                    <textarea style={styles.inputMedium} type="text" wrap="soft" value={currentViewProps.navleft}/>
+                    <textarea
+                        style={styles.inputMedium}
+                        type="text"
+                        wrap="soft"
+                        name="navleft"
+                        value={this.props.data[this.props.data.currView].navleft}
+                        onChange={this.props.updateProperties}/>
                 </form>
                 <form style={styles.form}>
                     <label style={styles.label}>Right</label>
-                    <textarea style={styles.inputMedium} type="text" wrap="soft" value={currentViewProps.navright}/>
+                    <textarea style={styles.inputMedium}
+                        type="text"
+                        wrap="soft"
+                        name="navright"
+                        value={this.props.data[this.props.data.currView].navright}
+                        onChange={this.props.updateProperties}/>
                 </form>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <button style={button}
+                        onMouseEnter={() => this.setState({ backgroundColor: '#1e2538', color: '#bdc2d8' })}
+                        onMouseLeave={() => this.setState({ backgroundColor: '#bdc2d8', color: '#1e2538' })}
+                    >Update</button>
+                </div>
             </div>
         )
     }
@@ -77,7 +111,7 @@ let styles = {
         height: '50px',
         display: 'inline-block',
         verticalAlign: 'middle',
-        padding:'5px'
+        padding: '5px'
     },
     inputMedium: {
         borderRadius: '3px',
@@ -89,7 +123,7 @@ let styles = {
         height: '25px',
         display: 'inline-block',
         verticalAlign: 'middle',
-        padding:'5px'
+        padding: '5px'
     },
     inputSmall: {
         borderRadius: '3px',
@@ -101,7 +135,7 @@ let styles = {
         height: '25px',
         display: 'inline-block',
         verticalAlign: 'middle',
-        padding:'5px'
+        padding: '5px'
     }
 }
 

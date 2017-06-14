@@ -5,7 +5,7 @@ import data from './obj.js';
 
 const width = 10;
 
-export default class Basics extends Component {
+export default class starterReactVR extends Component {
   constructor() {
     super();
     this.state = data;
@@ -15,7 +15,7 @@ export default class Basics extends Component {
     return (
       // <Scene>
         <View style={styles.container}>
-          <Pano source={asset(this.state.image)}></Pano>
+          <Pano source={asset('winter-outdoor.jpg')}></Pano>
           <Plane
             text={'idk this is text'}
             style={{color: 'black',
@@ -48,8 +48,9 @@ const styles = StyleSheet.create({
     flex: 1,
     width: width,
     alignItems: 'center',
-    flexDirection: 'column',
+    flexDirection: 'row',
+    alignItems: 'stretch'
   }
 })
 
-AppRegistry.registerComponent( 'Basics', () => Basics );
+AppRegistry.registerComponent( 'starterReactVR', () => starterReactVR );
