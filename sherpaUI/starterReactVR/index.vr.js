@@ -12,7 +12,6 @@ export default class starterReactVR extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <View>
 

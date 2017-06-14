@@ -36,7 +36,9 @@ class Gui extends Component {
                         currView={this.props.data.currView}
                         properties={this.props.data.right} />
                 </div>
-                <Canvas />
+                <Canvas 
+                    loadURL = {this.props.loadURL}
+                    />
                 <Properties
                     data={this.props.data}
                     updateProperties={this.props.updateProperties}
