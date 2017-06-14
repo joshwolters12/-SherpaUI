@@ -2,7 +2,7 @@ let outObj = {
     "image": "chess-world.jpg",
     "front": {
         "tite": "Hello World",
-        "text": "FRONT FRONT FRONT",
+        "text": "FRONT FRONT FONT",
         "navleft": "left",
         "navright": "right"
     },
