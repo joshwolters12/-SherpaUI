@@ -67,6 +67,7 @@ class Attribute extends Component {
                     <button style={button}
                         onMouseEnter={() => this.setState({ backgroundColor: '#1e2538', color: '#bdc2d8' })}
                         onMouseLeave={() => this.setState({ backgroundColor: '#bdc2d8', color: '#1e2538' })}
+                        onClick={this.props.writeToFile}
                     >Update</button>
                 </div>
             </div>

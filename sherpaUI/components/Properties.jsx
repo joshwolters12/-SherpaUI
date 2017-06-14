@@ -13,14 +13,15 @@ class Properties extends Component {
                 justifyContent: 'flex-start',
                 backgroundColor: '#1e2538'
             }
-            
+
         }
         return (
             <div style={styles.properties}>
-                <CoordinatesAndScaling 
-                data={this.props.data}
-                updateProperties = {this.props.updateProperties}
-                 />
+                <CoordinatesAndScaling
+                    data={this.props.data}
+                    updateProperties={this.props.updateProperties}
+                    writeToFile = {this.props.writeToFile}
+                />
             </div>
         )
     }

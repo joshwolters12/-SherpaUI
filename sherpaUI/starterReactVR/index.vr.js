@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, asset, Pano, View, Text, StyleSheet, Plane, Scene } from 'react-vr';
 import Frame from './frame.vr.js';
-import data from './obj.js';
+var data = require('./myjsonfile.json')
 
 const width = 3;
 
@@ -12,10 +12,11 @@ export default class starterReactVR extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <View>
 
-        <Pano source={asset(this.state.image)}></Pano>
+        <Pano source={asset(this.state.imageURL)}></Pano>
 
         <View style={styles.container}>
           <Frame text={this.state.front.text} translate={[-width / 2, 0, -5]} rotateY={0}/>

@@ -39,7 +39,8 @@ class Gui extends Component {
                 <Canvas />
                 <Properties
                     data={this.props.data}
-                    updateProperties={this.props.updateProperties} />
+                    updateProperties={this.props.updateProperties}
+                    writeToFile={this.props.writeToFile} />
             </div>
         )
     }

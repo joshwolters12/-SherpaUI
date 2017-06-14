@@ -8,6 +8,7 @@ class CoordinatesAndScaling extends Component {
                 <Attribute 
                 data={this.props.data}
                 updateProperties = {this.props.updateProperties}
+                writeToFile = {this.props.writeToFile}
                 />
             </div>
         )

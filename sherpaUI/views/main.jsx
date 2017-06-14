@@ -1,67 +1,75 @@
 import React, { Component } from 'react';
 import { SegmentedControl, SegmentedControlItem, Text } from 'react-desktop/macOs';
 import Gui from '../components/Gui';
+const fs = require('fs-extra');
 
 export default class Main extends Component {
   constructor() {
     super();
     this.state = {
-        imageURL: "chess-world.jpg",
-        currView: "front",
-        front: {
-          title: "Hello World",
-          text: "This is the starting text for the front view",
-          navleft: "Left",
-          navright: "Right"
-        },
-        back: {
-          title: "Looking Back",
-          text: "Heyooooo",
-          navleft: "Right",
-          navright: "Left"
-        },
-        left: {
-          title: "Looking Left",
-          text: "Watcha gonna do about it",
-          navleft: "Back",
-          navright: "Front"
-        },
-        right: {
-          title: "Looking Right",
-          text: "Teaaaaam Misfits!",
-          navleft: "Front",
-          navright: "Back"
-        }
+      imageURL: "chess-world.jpg",
+      currView: "front",
+      front: {
+        title: "Hello World",
+        text: "This is the starting text for the front view",
+        navleft: "Left",
+        navright: "Right"
+      },
+      back: {
+        title: "Looking Back",
+        text: "Heyooooo",
+        navleft: "Right",
+        navright: "Left"
+      },
+      left: {
+        title: "Looking Left",
+        text: "Watcha gonna do about it",
+        navleft: "Back",
+        navright: "Front"
+      },
+      right: {
+        title: "Looking Right",
+        text: "Teaaaaam Misfits!",
+        navleft: "Front",
+        navright: "Back"
       }
-      this.selectPage = this.selectPage.bind(this)
-      this.updateProperties = this.updateProperties.bind(this)
     }
-
-    selectPage(page) {
-        this.setState({currView: page});
-    }
-    
-    updateProperties(event){
-        let newState = this.state
-        console.log('newState',newState)
-        newState[this.state.currView][event.target.name] = event.target.value;
-        this.setState(newState)
-    }
-
-    render() {
-      return (
-        <div id='appcontainer' style={styles.appcontainer}>
-          <div id="headspacer" style={styles.header}></div>
-          <Gui 
-            data={this.state}
-            selectPage={this.selectPage}
-            updateProperties = {this.updateProperties}
-            ></Gui>
-          <div id="footer" style={styles.footer}></div>
-        </div>
-      );
-    }
+    this.selectPage = this.selectPage.bind(this)
+    this.updateProperties = this.updateProperties.bind(this)
+    this.writeToFile = this.writeToFile.bind(this)
   }
+
+  selectPage(page) {
+    this.setState({ currView: page });
+  }
+
+  updateProperties(event) {
+    let newState = this.state
+    console.log('newState', newState)
+    newState[this.state.currView][event.target.name] = event.target.value;
+    this.setState(newState)
+  }
+
+  writeToFile() {
+    console.log('executing button')
+    fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state), 'utf8', ()=>{console.log('it worked!?!?')});
+  }
+
+  render() {
+    return (
+      <div id='appcontainer' style={styles.appcontainer}>
+        <div id="headspacer" style={styles.header}></div>
+        <Gui
+          data={this.state}
+          selectPage={this.selectPage}
+          updateProperties={this.updateProperties}
+          writeToFile={this.writeToFile}
+        ></Gui>
+        <div id="footer" style={styles.footer}></div>
+      </div>
+    );
+  }
+}
 
 let styles = {
   appcontainer: {
