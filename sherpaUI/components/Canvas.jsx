@@ -4,7 +4,7 @@ class Canvas extends Component {
     render() {
         return (
             <div style = {styles.canvas}>
-                <iframe style={styles.iframe} src="http://localhost:8081/vr/"></iframe>
+                <iframe style={styles.iframe} src="http://localhost:8081/vr/?hotreload"></iframe>
             </div>
         )
     }

@@ -6,17 +6,13 @@ export default class Frame extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{}}>
         <Text style={{
-                transform: [ {translate: [-1,0,-3] && this.props.translate}, {rotateY: 0 && this.props.rotateY}], 
-                textAlign: 'center',
-                flexDirection: 'row',
-                fontSize: .2
+                transform: [ {translate: this.props.translate}, {rotateY: this.props.rotateY}], 
+                fontSize: .2,
               }}
         >{this.props.text}</Text>
       </View>
     )
   }
 };
-
-// AppRegistry.registerComponent( 'Frame', () => Frame );
