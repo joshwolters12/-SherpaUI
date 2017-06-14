@@ -18,25 +18,26 @@ export default class starterReactVR extends Component {
         <Pano source={asset(this.state.image)}></Pano>
 
         <View style={styles.container}>
-          <Frame text={this.state.front.text} translate={[-width/2, 0, -5]} rotateY={0}/> 
+          <Frame text={this.state.front.text} translate={[-width / 2, 0, -5]} rotateY={0}/>
         </View>
 
         <View style={styles.container}>
-          <Frame text={this.state.right.text} translate={[5-width/2, 0, 0]} rotateY={-90}/> 
+          <Frame text={this.state.right.text} translate={[5 - width / 2, 0, 0]} rotateY={-90}/>
         </View>
 
         <View style={styles.container}>
-          <Frame text={this.state.back.text} translate={[-width/2, 0, 5]} rotateY={180}/>
+          <Frame text={this.state.back.text} translate={[-width / 2, 0, 5]} rotateY={180}/>
         </View>
 
         <View style={styles.container}>
-          <Frame text={this.state.left.text} translate={[-5-width/2, 0, 0]} rotateY={90}/>
+          <Frame text={this.state.left.text} translate={[-5 - width / 2, 0, 0]} rotateY={90}/>
         </View>
 
       </View>
     )
   }
-};
+}
+;
 
 const styles = StyleSheet.create({
   container: {
@@ -48,9 +49,9 @@ const styles = StyleSheet.create({
     // backgroundColor: 'blue',
     // alignItems: 'center',
     flexDirection: 'row',
-    // justifyContent: 'flex-start'
-    // margin: 'none'
+  // justifyContent: 'flex-start'
+  // margin: 'none'
   }
 })
 
-AppRegistry.registerComponent( 'starterReactVR', () => starterReactVR );
+AppRegistry.registerComponent('starterReactVR', () => starterReactVR);
