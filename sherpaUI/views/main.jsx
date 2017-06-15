@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { SegmentedControl, SegmentedControlItem, Text } from 'react-desktop/macOs';
 import Gui from '../components/Gui';
+import Publish from '../components/Publish';
+import Open from '../components/Open';
 const fs = require('fs-extra');
 var data = require('../starterReactVR/myjsonfile.json');
 const dialog = require('electron').remote.dialog;
@@ -76,9 +78,11 @@ export default class Main extends Component {
     return (
       <div id='appcontainer' style={styles.appcontainer} >
         <div id="headspacer" style={styles.header}>
+          <Open/>
           <div style={styles.logo}>
             <img src="./starterReactVR/static_assets/sherpa.png" />
           </div>
+          <Publish/>
         </div>
         <Gui
           data={this.state}
@@ -101,13 +105,17 @@ let styles = {
     width: '100%',
     height: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   header: {
     height: "8%",
+    width: "100%",
+    minWidth: '800px',
     minHeight: '50px',
-    flex: '[1 0 5%]',
-    display: 'flex'
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent:'center',
+    flex: '[1 0 5%]'
   },
   footer: {
     height: '2%',
