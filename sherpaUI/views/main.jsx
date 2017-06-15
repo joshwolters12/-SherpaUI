@@ -67,6 +67,7 @@ export default class Main extends Component {
           updateProperties={this.updateProperties}
           writeToFile={this.writeToFile}
           loadURL={this.state.loadURL}
+          imageURL={this.state.imageURL}
         ></Gui>
         <div id="footer" style={styles.footer}></div>
       </div>
