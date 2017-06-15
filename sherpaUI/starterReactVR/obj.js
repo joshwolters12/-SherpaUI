@@ -2,7 +2,7 @@ let outObj = {
     "image": "chess-world.jpg",
     "front": {
         "tite": "Hello World",
-        "text": "FRONT FRONT FONT",
+        "text": "FRONT FRONT FRONT",
         "navleft": "left",
         "navright": "right"
     },
@@ -12,13 +12,13 @@ let outObj = {
         "navleft": "left",
         "navright": "right"
     },
-    "left": {
+    "back": {
         "tite": "Hello World",
         "text": "BACK BACK BACK",
         "navleft": "left",
         "navright": "right"
     },
-    "back": {
+    "left": {
         "tite": "Hello World",
         "text": "LEFT LEFT LEFT",
         "navleft": "left",
