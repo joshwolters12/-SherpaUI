@@ -3,10 +3,7 @@ import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleShe
 // import { VRInstance } from 'react-vr-web';
 import Frame from './frame.vr.js';
 // import data from './myjsonfile.json';
-console.log('before require json');
 var data = require('./myjsonfile.json');
-console.log('after require json');
-console.log('data: ',data);
 
 // const camera = VRInstance.camera()
 const width = 3;
@@ -22,7 +19,6 @@ export default class starterReactVR extends Component {
   }
 
   navigate() {
-    console.log('in the click me');
     let a = this.state.sceneRotate + 90;
     this.setState({sceneRotate: a})
     
@@ -53,7 +49,6 @@ export default class starterReactVR extends Component {
   }
 
   render() {
-    console.log('in the render');
     return (
       <Scene style={{ 
                 transform: [ 
