@@ -34,7 +34,7 @@ class Image extends Component {
             <div style={styles.page}
                 onMouseEnter={() => this.setState({ opacity: '1' , text:"Change Image"})}
                 onMouseLeave={() => this.setState({ opacity: '0.75', text: this.props.imageURL })}
-                onClick={() => this.props.selectPage(this.props.page)}
+                onClick={this.props.chooseImage}
             >
                 {this.state.text}
             </div>

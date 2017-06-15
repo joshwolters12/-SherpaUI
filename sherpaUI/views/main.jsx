@@ -3,6 +3,9 @@ import { SegmentedControl, SegmentedControlItem, Text } from 'react-desktop/macO
 import Gui from '../components/Gui';
 const fs = require('fs-extra');
 var data = require('../starterReactVR/myjsonfile.json');
+import { BrowserWindow, dialog } from 'electron';
+
+console.log(dialog)
 
 export default class Main extends Component {
   constructor() {
@@ -12,6 +15,7 @@ export default class Main extends Component {
     this.updateProperties = this.updateProperties.bind(this)
     this.writeToFile = this.writeToFile.bind(this)
     this.setState = this.setState.bind(this)
+    this.chooseImage = this.chooseImage.bind(this)
   }
 
   selectPage(page) {
@@ -35,24 +39,56 @@ export default class Main extends Component {
     })
   }
 
+  chooseImage() {
+    console.log('choosing image')
+    dialog.showOpenDialog({
+      filters: [
+        {
+          name: 'Images',
+          extensions: ['jpg', 'png', 'gif']
+        }
+      ]
+    }, function (filePath) {
+      if (filePath === undefined) return;
+      let imageToLoad = filePath[0].split("/").pop()
+
+      fs.copy(filePath.toString(), 'starterReactVR/static_assets/' + imageToLoad, function (err) {
+        if (err) return console.log(err)
+      })
+
+      fs.readFile('starterReactVR/myjsonfile.json', 'utf8', function (err, data) {
+        let obj = JSON.parse(data)
+        obj.imageURL = imageToLoad
+        let json = JSON.stringify(obj, null, 2)
+
+        fs.writeFile('./starterReactVR/myjsonfile.json', json, 'utf8', function (err) {
+          if (err) return console.log(err)
+          mainWindow.reload()
+        })
+
+      })
+    })
+  }
+
   render() {
-    return (
-      <div id='appcontainer' style={styles.appcontainer}>
-        <div id="headspacer" style={styles.header}>
-          <div style={styles.logo}>
-            <img src="./starterReactVR/static_assets/sherpa.png"/>
-          </div>
+        return(
+      <div id= 'appcontainer' style= { styles.appcontainer } >
+      <div id="headspacer" style={styles.header}>
+        <div style={styles.logo}>
+          <img src="./starterReactVR/static_assets/sherpa.png" />
         </div>
-        <Gui
-      data={this.state}
-      selectPage={this.selectPage}
-      updateProperties={this.updateProperties}
-      writeToFile={this.writeToFile}
-      loadURL={this.state.loadURL}
-      imageURL={this.state.imageURL}
-      ></Gui>
-        <div id="footer" style={styles.footer}></div>
       </div>
+      <Gui
+        data={this.state}
+        selectPage={this.selectPage}
+        updateProperties={this.updateProperties}
+        writeToFile={this.writeToFile}
+        loadURL={this.state.loadURL}
+        imageURL={this.state.imageURL}
+        chooseImage = {this.chooseImage}
+      ></Gui>
+      <div id="footer" style={styles.footer}></div>
+      </div >
       );
   }
 }
@@ -76,7 +112,7 @@ let styles = {
     minHeight: '15px',
     flex: '[1 0 10%]',
   },
-  logo:{
+  logo: {
     width: '200px',
     height: '48px',
     margin: 'auto',

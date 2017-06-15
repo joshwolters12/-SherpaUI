@@ -18,7 +18,7 @@ app.on('window-all-closed', () => {
 app.on('ready', () => {
   exec('node starterReactVR/node_modules/react-native/local-cli/cli.js start')
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 900,
     height: 600
   });
   setTimeout(function() {
@@ -26,36 +26,36 @@ app.on('ready', () => {
   }, 500)
 
   //LOAD A FILE TO THE STATIC ASSETS DIRECTORY
-  dialog.showOpenDialog({
-    filters: [
-      {
-        name: 'Images',
-        extensions: ['jpg', 'png', 'gif']
-      }
-    ]
-  }, function(filePath) {
-    if (filePath === undefined) return;
-    let imageToLoad = filePath[0].split("/").pop()
+  // dialog.showOpenDialog({
+  //   filters: [
+  //     {
+  //       name: 'Images',
+  //       extensions: ['jpg', 'png', 'gif']
+  //     }
+  //   ]
+  // }, function(filePath) {
+  //   if (filePath === undefined) return;
+  //   let imageToLoad = filePath[0].split("/").pop()
 
-    fs.copy(filePath.toString(), 'starterReactVR/static_assets/' + imageToLoad, function(err) {
-      if (err) return console.log(err)
-    })
+  //   fs.copy(filePath.toString(), 'starterReactVR/static_assets/' + imageToLoad, function(err) {
+  //     if (err) return console.log(err)
+  //   })
 
-    fs.readFile('starterReactVR/myjsonfile.json', 'utf8', function(err, data) {
-      let obj = JSON.parse(data)
-      obj.imageURL = imageToLoad
-      let json = JSON.stringify(obj, null, 2)
+  //   fs.readFile('starterReactVR/myjsonfile.json', 'utf8', function(err, data) {
+  //     let obj = JSON.parse(data)
+  //     obj.imageURL = imageToLoad
+  //     let json = JSON.stringify(obj, null, 2)
 
-      fs.writeFile('./starterReactVR/myjsonfile.json', json, 'utf8', function(err) {
-        if (err) return console.log(err)
-        mainWindow.reload()
-      })
+  //     fs.writeFile('./starterReactVR/myjsonfile.json', json, 'utf8', function(err) {
+  //       if (err) return console.log(err)
+  //       mainWindow.reload()
+  //     })
 
-    })
+  //   })
 
 
 
-  });
+  // });
 
 
 

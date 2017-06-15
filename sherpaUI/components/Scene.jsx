@@ -23,9 +23,10 @@ let styles = {
     justifyContent: 'flex-start'
   },
   scene: {
-      margin: '10px auto',
+      margin: '5px auto',
       height: '50px',
-      width: '50px',
+      width: '85%',
+      maxWidth: '50px',
       backgroundColor: '#181b2a',
       borderRadius:'3px',
       color: '#707f9c',

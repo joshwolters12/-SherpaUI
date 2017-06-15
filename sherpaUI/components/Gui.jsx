@@ -14,6 +14,7 @@ class Gui extends Component {
                 <div id='pageContainer' style={styles.pageContainer}>
                     <Image 
                         imageURL = {this.props.imageURL}
+                        chooseImage = {this.props.chooseImage}
                         />
                     <Page id='frontpage'
                         name='Front View'
