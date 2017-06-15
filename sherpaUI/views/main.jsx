@@ -11,11 +11,13 @@ export default class Main extends Component {
     this.selectPage = this.selectPage.bind(this)
     this.updateProperties = this.updateProperties.bind(this)
     this.writeToFile = this.writeToFile.bind(this)
-    this.setState=this.setState.bind(this)
+    this.setState = this.setState.bind(this)
   }
 
   selectPage(page) {
-    this.setState({ currView: page });
+    this.setState({
+      currView: page
+    });
   }
 
   updateProperties(event) {
@@ -25,8 +27,12 @@ export default class Main extends Component {
   }
 
   writeToFile() {
-    fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state), 'utf8', () => { console.log('Writing Changes to File') });
-    this.setState({loadURL: this.state.loadURL + Date.now()})
+    fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state), 'utf8', () => {
+      console.log('Writing Changes to File')
+    });
+    this.setState({
+      loadURL: this.state.loadURL + Date.now()
+    })
   }
 
   render() {
@@ -38,16 +44,16 @@ export default class Main extends Component {
           </div>
         </div>
         <Gui
-          data={this.state}
-          selectPage={this.selectPage}
-          updateProperties={this.updateProperties}
-          writeToFile={this.writeToFile}
-          loadURL={this.state.loadURL}
-          imageURL={this.state.imageURL}
-        ></Gui>
+      data={this.state}
+      selectPage={this.selectPage}
+      updateProperties={this.updateProperties}
+      writeToFile={this.writeToFile}
+      loadURL={this.state.loadURL}
+      imageURL={this.state.imageURL}
+      ></Gui>
         <div id="footer" style={styles.footer}></div>
       </div>
-    );
+      );
   }
 }
 
