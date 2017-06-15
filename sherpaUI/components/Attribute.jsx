@@ -67,6 +67,7 @@ class Attribute extends Component {
                     <button style={button}
                         onMouseEnter={() => this.setState({ backgroundColor: '#1e2538', color: '#bdc2d8' })}
                         onMouseLeave={() => this.setState({ backgroundColor: '#bdc2d8', color: '#1e2538' })}
+                        onClick={this.props.writeToFile}
                     >Update</button>
                 </div>
             </div>
@@ -76,10 +77,13 @@ class Attribute extends Component {
 
 let styles = {
     attributeContainer: {
-        width: '95%',
+        width: '100%',
         height: '20%',
-        margin: '1px auto',
-        fontSize: '14px'
+        margin: 'auto',
+        fontSize: '14px',
+        backgroundColor: '#1e2538',
+        padding: '15px',
+        borderRadius: '3px',
     },
     text: {
         color: 'black',
@@ -93,7 +97,8 @@ let styles = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        padding: '2px'
+        padding: '2px',
+        
     },
     label: {
         padding: '3px',

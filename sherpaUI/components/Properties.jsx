@@ -5,22 +5,23 @@ class Properties extends Component {
     render() {
         let styles = {
             properties: {
-                height: '100%',
+                height: 'auto',
                 width: '30%',
                 minWidth: '240px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'flex-start',
-                backgroundColor: '#1e2538'
+                margin: '0.5%'
             }
-            
+
         }
         return (
             <div style={styles.properties}>
-                <CoordinatesAndScaling 
-                data={this.props.data}
-                updateProperties = {this.props.updateProperties}
-                 />
+                <CoordinatesAndScaling
+                    data={this.props.data}
+                    updateProperties={this.props.updateProperties}
+                    writeToFile = {this.props.writeToFile}
+                />
             </div>
         )
     }

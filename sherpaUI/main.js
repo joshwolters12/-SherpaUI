@@ -1,7 +1,13 @@
-import { app, BrowserWindow } from 'electron';
-
+import { app, BrowserWindow, dialog } from 'electron';
+// const dialog = require('electron').remote
 const exec = require('child_process').exec;
+const fs = require('fs-extra');
+
+
+
+
 let mainWindow = null;
+
 
 app.on('window-all-closed', () => {
   if (process.platform != 'darwin') {
@@ -18,6 +24,44 @@ app.on('ready', () => {
   setTimeout(function() {
     mainWindow.loadURL('file://' + __dirname + '/index.html',);
   }, 500)
+
+  //LOAD A FILE TO THE STATIC ASSETS DIRECTORY
+  dialog.showOpenDialog({
+    filters: [
+      {
+        name: 'Images',
+        extensions: ['jpg', 'png', 'gif']
+      }
+    ]
+  }, function(filePath) {
+    if (filePath === undefined) return;
+    let imageToLoad = filePath[0].split("/").pop()
+
+    fs.copy(filePath.toString(), 'starterReactVR/static_assets/' + imageToLoad, function(err) {
+      if (err) return console.log(err)
+    })
+
+    fs.readFile('starterReactVR/myjsonfile.json', 'utf8', function(err, data) {
+      let obj = JSON.parse(data)
+      obj.imageURL = imageToLoad
+      let json = JSON.stringify(obj, null, 2)
+
+      fs.writeFile('./starterReactVR/myjsonfile.json', json, 'utf8', function(err) {
+        if (err) return console.log(err)
+        mainWindow.reload()
+      })
+
+    })
+
+
+
+  });
+
+
+
+
+
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });

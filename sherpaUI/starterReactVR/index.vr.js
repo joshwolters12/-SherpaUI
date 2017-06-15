@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+
 import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleSheet, Plane, Scene, VrHeadModel } from 'react-vr';
 // import { VRInstance } from 'react-vr-web';
+
 import Frame from './frame.vr.js';
-import data from './obj.js';
+var data = require('./myjsonfile.json')
 
 // const camera = VRInstance.camera()
 const width = 3;
@@ -81,26 +83,27 @@ export default class starterReactVR extends Component {
         </VrButton>
 
         <View style={styles.container}>
-          <Frame text={this.state.front.text} translate={[-width/2, 0, -5]} rotateY={0}/> 
+          <Frame text={this.state.front.text} translate={[-width / 2, 0, -5]} rotateY={0}/>
         </View>
 
         <View style={styles.container}>
-          <Frame text={this.state.right.text} translate={[5-width/2, 0, 0]} rotateY={-90}/> 
+          <Frame text={this.state.right.text} translate={[5 - width / 2, 0, 0]} rotateY={-90}/>
         </View>
 
         <View style={styles.container}>
-          <Frame text={this.state.back.text} translate={[-width/2, 0, 5]} rotateY={180}/>
+          <Frame text={this.state.back.text} translate={[-width / 2, 0, 5]} rotateY={180}/>
         </View>
 
         <View style={styles.container}>
-          <Frame text={this.state.left.text} translate={[-5-width/2, 0, 0]} rotateY={90}/>
+          <Frame text={this.state.left.text} translate={[-5 - width / 2, 0, 0]} rotateY={90}/>
         </View>
 
       </View>
       </Scene>
     )
   }
-};
+}
+;
 
 const styles = StyleSheet.create({
   container: {
@@ -111,4 +114,4 @@ const styles = StyleSheet.create({
   }
 })
 
-AppRegistry.registerComponent( 'starterReactVR', () => starterReactVR );
+AppRegistry.registerComponent('starterReactVR', () => starterReactVR);

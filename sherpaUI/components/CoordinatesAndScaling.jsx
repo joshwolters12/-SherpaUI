@@ -8,6 +8,7 @@ class CoordinatesAndScaling extends Component {
                 <Attribute 
                 data={this.props.data}
                 updateProperties = {this.props.updateProperties}
+                writeToFile = {this.props.writeToFile}
                 />
             </div>
         )
@@ -16,9 +17,9 @@ class CoordinatesAndScaling extends Component {
 
 let styles = {
     properties: {
-        width: '90%',
-        height: 'auto',
-        margin: '10px auto'
+        width: '100%',
+        height: 'auto'
+        
     }
 }
 

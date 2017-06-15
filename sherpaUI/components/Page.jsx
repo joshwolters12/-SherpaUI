@@ -11,8 +11,8 @@ class Page extends Component {
     render() {
         let styles = {
             page: {
-                height: '22%',
-                width: '85%',
+                height: '21%',
+                width: '95%',
                 backgroundColor: (this.props.page === this.props.currView) ? '#707f9c' : '#1e2538',
                 margin: 'auto',
                 borderRadius: '2px',
