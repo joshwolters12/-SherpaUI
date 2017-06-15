@@ -1,1 +1,28 @@
-{"imageURL":"chess-world.jpg","currView":"front","front":{"title":"Hello World","text":"HIIIII DETECTING CHANGE","navleft":"Left","navright":"Right"},"back":{"title":"Looking Back","text":"Heyooooo","navleft":"Right","navright":"Left"},"left":{"title":"Looking Left","text":"Watcha gonna do about it","navleft":"Back","navright":"Front"},"right":{"title":"Looking Right","text":"Teaaaaam Misfits!","navleft":"Front","navright":"Back"}}
+{
+  "imageURL": "chess-world.jpg",
+  "currView": "front",
+  "front": {
+    "title": "Hello World",
+    "text": "This is the starting text for the front viewddgfdfg",
+    "navleft": "Left",
+    "navright": "Right"
+  },
+  "back": {
+    "title": "Looking Back",
+    "text": "Heyooooo",
+    "navleft": "Right",
+    "navright": "Left"
+  },
+  "left": {
+    "title": "Looking Left",
+    "text": "Watcha gonna do about it",
+    "navleft": "Back",
+    "navright": "Front"
+  },
+  "right": {
+    "title": "Looking Right",
+    "text": "Teaaaaam Misfits!",
+    "navleft": "Front",
+    "navright": "Back"
+  }
+}

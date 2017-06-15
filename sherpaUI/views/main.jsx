@@ -40,7 +40,9 @@ export default class Main extends Component {
   }
 
   selectPage(page) {
-    this.setState({ currView: page });
+    this.setState({
+      currView: page
+    });
   }
 
   updateProperties(event) {
@@ -52,7 +54,9 @@ export default class Main extends Component {
 
   writeToFile() {
     console.log('executing button')
-    fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state), 'utf8', ()=>{console.log('it worked!?!?')});
+    fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state, null, 2), 'utf8', () => {
+      console.log('it worked!?!?')
+    });
   }
 
   render() {
@@ -60,14 +64,14 @@ export default class Main extends Component {
       <div id='appcontainer' style={styles.appcontainer}>
         <div id="headspacer" style={styles.header}></div>
         <Gui
-          data={this.state}
-          selectPage={this.selectPage}
-          updateProperties={this.updateProperties}
-          writeToFile={this.writeToFile}
-        ></Gui>
+      data={this.state}
+      selectPage={this.selectPage}
+      updateProperties={this.updateProperties}
+      writeToFile={this.writeToFile}
+      ></Gui>
         <div id="footer" style={styles.footer}></div>
       </div>
-    );
+      );
   }
 }
 
