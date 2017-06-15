@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleSheet, Plane, Scene, VrHeadModel } from 'react-vr';
 // import { VRInstance } from 'react-vr-web';
 import Frame from './frame.vr.js';
-import data from './obj.js';
+// import data from './myjsonfile.json';
+console.log('before require json');
+var data = require('./myjsonfile.json');
+console.log('after require json');
+console.log('data: ',data);
 
 // const camera = VRInstance.camera()
 const width = 3;
 
-console.log('VrHeadModel: ', VrHeadModel)
+// console.log('VrHeadModel: ', VrHeadModel)
 // console.log('camera: ', camera);
 
 export default class starterReactVR extends Component {
@@ -49,6 +53,7 @@ export default class starterReactVR extends Component {
   }
 
   render() {
+    console.log('in the render');
     return (
       <Scene style={{ 
                 transform: [ 
@@ -57,7 +62,7 @@ export default class starterReactVR extends Component {
             }}>
       <View >
 
-        <Pano source={asset(this.state.image)}></Pano>
+        <Pano source={asset(this.state.imageURL)}></Pano>
         <VrButton 
           style={{
                 transform: [ {translate: [-width/2,0,-5]}], 
