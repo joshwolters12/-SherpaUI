@@ -5,13 +5,13 @@ class Properties extends Component {
     render() {
         let styles = {
             properties: {
-                height: '100%',
+                height: 'auto',
                 width: '30%',
                 minWidth: '240px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'flex-start',
-                backgroundColor: '#1e2538'
+                margin: '1.5%'
             }
 
         }
