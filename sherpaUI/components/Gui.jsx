@@ -3,6 +3,7 @@ import Scene from '../components/Scene';
 import Page from '../components/Page';
 import Canvas from '../components/Canvas';
 import Properties from '../components/Properties';
+import Image from '../components/Image';
 
 class Gui extends Component {
 
@@ -11,6 +12,9 @@ class Gui extends Component {
             <div style={styles.gui}>
                 <Scene />
                 <div id='pageContainer' style={styles.pageContainer}>
+                    <Image 
+                        imageURL = {this.props.imageURL}
+                        />
                     <Page id='frontpage'
                         name='Front View'
                         page='front'

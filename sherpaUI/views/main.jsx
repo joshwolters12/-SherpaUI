@@ -55,7 +55,7 @@ export default class Main extends Component {
   }
 
   writeToFile() {
-    fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state, null, 2), 'utf8', () => {
+    fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state), 'utf8', () => {
       console.log('Writing Changes to File')
     });
     this.setState({
@@ -73,6 +73,7 @@ export default class Main extends Component {
       updateProperties={this.updateProperties}
       writeToFile={this.writeToFile}
       loadURL={this.state.loadURL}
+      imageURL={this.state.imageURL}
       ></Gui>
         <div id="footer" style={styles.footer}></div>
       </div>
