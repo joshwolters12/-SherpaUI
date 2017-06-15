@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, asset, Pano, View, Text, StyleSheet, Plane, Scene } from 'react-vr';
+import { AppRegistry, asset, Pano, View, Text, StyleSheet, Plane, Scene, VideoPano } from 'react-vr';
 import Frame from './frame.vr.js';
 var data = require('./myjsonfile.json')
 
@@ -16,6 +16,7 @@ export default class starterReactVR extends Component {
       <View>
 
         <Pano source={asset(this.state.imageURL)}></Pano>
+        {/*<VideoPano source={asset("tahiti2.mp4")} />*/}
 
         <View style={styles.container}>
           <Frame text={this.state.front.text} translate={[-width / 2, 0, -5]} rotateY={0}/>

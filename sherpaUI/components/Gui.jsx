@@ -67,7 +67,8 @@ let styles = {
         minWidth: '240px',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        padding:'0.2%'
     }
 }
 

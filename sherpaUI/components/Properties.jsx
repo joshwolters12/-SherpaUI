@@ -11,7 +11,7 @@ class Properties extends Component {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'flex-start',
-                margin: '1.5%'
+                margin: '0.5%'
             }
 
         }

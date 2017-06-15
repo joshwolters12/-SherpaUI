@@ -19,13 +19,15 @@ let styles = {
     canvas: {
         backgroundColor: 'grey',
         width: '50%',
-        height: '100%',
-        minWidth: '300px'
+        height: 'auto',
+        minWidth: '300px',
+        margin: '0.5% 0'
     },
     iframe: {
         width: '100%',
         height: '100%',
-        borderWidth: '0px'
+        borderWidth: '0px',
+        borderRadius: '3px'
     }
 }
 

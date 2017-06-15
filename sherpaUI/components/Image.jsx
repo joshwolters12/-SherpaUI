@@ -13,7 +13,7 @@ class Image extends Component {
         let styles = {
             page: {
                 height: '10%',
-                width: '88%',
+                width: '95%',
                 // backgroundColor: (this.props.page === this.props.currView) ? '#707f9c' : '#1e2538',
                 backgroundImage: `url("./starterReactVR/static_assets/${this.props.imageURL}")`,
                 backgroundSize: 'cover',
@@ -22,7 +22,7 @@ class Image extends Component {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                color: (this.props.page === this.props.currView) ? 'white' : '#707f9c',
+                color: 'white',
                 fontSize: '16px',
                 opacity: this.state.opacity,
                 cursor: 'hand',
