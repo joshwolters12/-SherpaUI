@@ -16,8 +16,12 @@ import Frame from './frame.vr.js';
 console.log('before require json');
 var data = require('./myjsonfile.json');
 console.log('after require json');
+
 console.log('data: ',data);
 // console.log('VRInstance: ', VRInstance)
+
+//const exec = require('child_process').exec;
+
 
 // const camera = VRInstance.camera()
 const width = 3;
@@ -39,7 +43,7 @@ export default class starterReactVR extends Component {
     let theta = 90 - rotation[1]*180/(Math.PI);
     console.log('theta: ', theta)
     this.setState({sceneRotate: theta})
-    
+
   }
 
   printLocation() {
@@ -74,29 +78,48 @@ export default class starterReactVR extends Component {
   render() {
     console.log('in the render');
     return (
+
       <Scene style={{ 
                 transform: [ 
                   {rotateY: this.state.sceneRotate},
                 ]
             }}>
+
       <View >
         <Pano source={asset(this.state.imageURL)}></Pano>
 
         <VrButton
-          style={{
-                transform: [ {translate: [-width/2,0,-5]}], 
-          }} 
-          onClick={() => this.printLocation()}>
+      style={{
+        transform: [{
+          translate: [-width / 2, 0, -5]
+        }],
+      }}
+      onClick={() => this.navigate()}>
+          <Text>move to the left</Text>
+        </VrButton>
+
+
+        <VrButton
+      style={{
+        transform: [{
+          translate: [-width / 2, 0, -5]
+        }],
+      }}
+      onClick={() => this.printLocation()}>
           <Text>location</Text>
         </VrButton>
 
-        {/*<VrButton
-          style={{
-                transform: [ {translate: [-width/2,0,-5]}], 
-          }} 
-          onClick={() => this.printCamera()}>
+
+        <VrButton
+      style={{
+        transform: [{
+          translate: [-width / 2, 0, -5]
+        }],
+      }}
+      onClick={() => this.printCamera()}>
+
           <Text>camera</Text>
-        </VrButton>*/}
+        </VrButton>
 
         <VrButton 
           style={{
@@ -107,26 +130,27 @@ export default class starterReactVR extends Component {
         </VrButton>
 
         <View style={styles.container}>
-          <Frame text={this.state.front.text} translate={[-width/2, 0, -5]} rotateY={0}/> 
+          <Frame text={this.state.front.text} translate={[-width / 2, 0, -5]} rotateY={0}/>
         </View>
 
         <View style={styles.container}>
-          <Frame text={this.state.right.text} translate={[5-width/2, 0, 0]} rotateY={-90}/> 
+          <Frame text={this.state.right.text} translate={[5 - width / 2, 0, 0]} rotateY={-90}/>
         </View>
 
         <View style={styles.container}>
-          <Frame text={this.state.back.text} translate={[-width/2, 0, 5]} rotateY={180}/>
+          <Frame text={this.state.back.text} translate={[-width / 2, 0, 5]} rotateY={180}/>
         </View>
 
         <View style={styles.container}>
-          <Frame text={this.state.left.text} translate={[-5-width/2, 0, 0]} rotateY={90}/>
+          <Frame text={this.state.left.text} translate={[-5 - width / 2, 0, 0]} rotateY={90}/>
         </View>
 
       </View>
       </Scene>
     )
   }
-};
+}
+;
 
 const styles = StyleSheet.create({
   container: {
@@ -137,4 +161,4 @@ const styles = StyleSheet.create({
   }
 })
 
-AppRegistry.registerComponent( 'starterReactVR', () => starterReactVR );
+AppRegistry.registerComponent('starterReactVR', () => starterReactVR);
