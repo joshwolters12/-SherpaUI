@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import CoordinatesAndScaling from '../components/CoordinatesAndScaling';
+import Project from '../components/Project';
 
 class Properties extends Component {
     render() {
         let styles = {
             properties: {
                 height: 'auto',
-                width: '30%',
+                width: '25%',
                 minWidth: '240px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -17,6 +18,12 @@ class Properties extends Component {
         }
         return (
             <div style={styles.properties}>
+                <Project
+                    data={this.props.data}
+                    updateProperties={this.props.updateProperties}
+                    writeToFile = {this.props.writeToFile}
+                    updateName = {this.props.updateName}
+                />
                 <CoordinatesAndScaling
                     data={this.props.data}
                     updateProperties={this.props.updateProperties}

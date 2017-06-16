@@ -9,7 +9,13 @@ class Canvas extends Component {
                 <iframe
                     style={styles.iframe}
                     src={this.props.loadURL}
-                    ref={(f) => this.ifr = f} />
+                    >
+                </iframe>
+                <div 
+                style={styles.openWindow}
+                onClick={this.props.openWindow}>
+                </div>
+                
             </div>
         )
     }
@@ -18,16 +24,27 @@ class Canvas extends Component {
 let styles = {
     canvas: {
         backgroundColor: 'grey',
-        width: '50%',
+        width: '55%',
         height: 'auto',
         minWidth: '300px',
-        margin: '0.5% 0'
+        margin: '0.5% 0',
+        position:'relative'
     },
     iframe: {
         width: '100%',
         height: '100%',
         borderWidth: '0px',
-        borderRadius: '3px'
+        borderRadius: '3px',
+        borderColor: 'black'
+    },
+    openWindow:{
+        position: 'absolute',
+        height: '60px',
+        width: '60px',
+        backgroundColor: 'transparent',
+        right: '15px',
+        bottom: '15px',
+        cursor: 'pointer'
     }
 }
 

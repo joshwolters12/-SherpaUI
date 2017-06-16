@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleSheet, Scene, VrHeadModel } from 'react-vr';
 import Frame from './frame.vr.js';
+
 const data = require('./myjsonfile.json');
 const width = 5;
+
 
 export default class starterReactVR extends Component {
   constructor() {
@@ -34,13 +36,15 @@ export default class starterReactVR extends Component {
 
   render() {
     return (
+
       <Scene style={{ 
                 transform: [ 
                   {rotateX: this.state.sceneRotateX},
                   {rotateY: this.state.sceneRotateY},
                 ]
             }}>
-        <View >
+        <View>
+
           <Pano source={asset(this.state.imageURL)}></Pano>
 
           <View style={styles.container}>
@@ -76,7 +80,8 @@ export default class starterReactVR extends Component {
       </Scene>
     )
   }
-};
+}
+;
 
 const styles = StyleSheet.create({
   container: {
@@ -87,4 +92,4 @@ const styles = StyleSheet.create({
   }
 })
 
-AppRegistry.registerComponent( 'starterReactVR', () => starterReactVR );
+AppRegistry.registerComponent('starterReactVR', () => starterReactVR);

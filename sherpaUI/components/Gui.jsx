@@ -43,11 +43,14 @@ class Gui extends Component {
                 </div>
                 <Canvas 
                     loadURL = {this.props.loadURL}
+                    openWindow={this.props.openWindow}
                     />
                 <Properties
                     data={this.props.data}
+                    updateName = {this.props.updateName}
                     updateProperties={this.props.updateProperties}
                     writeToFile={this.props.writeToFile} />
+                    
             </div>
         )
     }
