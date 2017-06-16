@@ -4,6 +4,7 @@
 
 // Auto-generated content.
 import { Module, VRInstance } from 'react-vr-web';
+// import { Module, Player } from 'ovrui';
 
 class TeleportModule extends Module {
   constructor() {
@@ -22,6 +23,13 @@ class TeleportModule extends Module {
       // Call this to make sure anything positioned relative to the camera is set up properly:
       this._camera.updateMatrixWorld(true);
     }
+  }
+
+  camera(){
+    console.log('VRInstance: ', VRInstance.options);
+    console.log('camera?: ', window.playerCamera);
+    console.log('_camera?: ', this._camera);
+    console.log('_camerasldkfja: ', this._camera.projectionMatrix.getPosition());
   }
 
   rotateCamera(xdeg, ydeg, zdeg) {
@@ -70,6 +78,7 @@ function init(bundle, parent, options) {
   };
   // Begin the animation loop
   vr.start();
+  window.playerCamera = vr.player._camera;
   return vr;
 }
 
