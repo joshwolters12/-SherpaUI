@@ -11,7 +11,7 @@ class Image extends Component {
 
     render() {
         let styles = {
-            image: {
+            page: {
                 height: '10%',
                 width: '95%',
                 // backgroundColor: (this.props.page === this.props.currView) ? '#707f9c' : '#1e2538',
@@ -26,12 +26,12 @@ class Image extends Component {
                 fontSize: '16px',
                 opacity: this.state.opacity,
                 cursor: 'hand',
-                textShadow: '1px 1px black',
+                textShadow: '1px 1px black'
             },
         }
 
         return (
-            <div style={styles.image}
+            <div style={styles.page}
                 onMouseEnter={() => this.setState({ opacity: '1' , text:"Change Image"})}
                 onMouseLeave={() => this.setState({ opacity: '0.75', text: this.props.imageURL })}
                 onClick={this.props.chooseImage}

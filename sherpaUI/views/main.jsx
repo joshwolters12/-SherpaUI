@@ -43,7 +43,7 @@ export default class Main extends Component {
     })
   }
 
-  publish(){
+  publish() {
     exec("npm run publish")
   }
 
@@ -57,16 +57,16 @@ export default class Main extends Component {
             extensions: ['jpg', 'png', 'gif']
           }
         ]
-      }, function (filePath) {
+      }, function(filePath) {
         if (filePath === undefined) return;
         let imageToLoad = filePath[0].split("/").pop();
         let pathLength = filePath[0].split("/").length;
-        let pathMatch = filePath[0].split("/").slice(pathLength - 3,pathLength).join("/");
+        let pathMatch = filePath[0].split("/").slice(pathLength - 3, pathLength).join("/");
 
         if (pathMatch !== 'starterReactVR/static_assets/' + imageToLoad) {
           console.log('filePath', filePath)
           console.log('saveURI', 'starterReactVR/static_assets/' + imageToLoad)
-          fs.copy(filePath.toString(), 'starterReactVR/static_assets/' + imageToLoad, function (err) {
+          fs.copy(filePath.toString(), 'starterReactVR/static_assets/' + imageToLoad, function(err) {
             if (err) return console.log(err)
             resolve(imageToLoad)
           })
@@ -91,21 +91,21 @@ export default class Main extends Component {
             <img src="./starterReactVR/static_assets/sherpa.png" />
           </div>
           <Publish
-            publish = {this.publish}
-          />
+      publish = {this.publish}
+      />
         </div>
         <Gui
-          data={this.state}
-          selectPage={this.selectPage}
-          updateProperties={this.updateProperties}
-          writeToFile={this.writeToFile}
-          loadURL={this.state.loadURL}
-          imageURL={this.state.imageURL}
-          chooseImage={this.chooseImage}
-        ></Gui>
+      data={this.state}
+      selectPage={this.selectPage}
+      updateProperties={this.updateProperties}
+      writeToFile={this.writeToFile}
+      loadURL={this.state.loadURL}
+      imageURL={this.state.imageURL}
+      chooseImage={this.chooseImage}
+      ></Gui>
         <div id="footer" style={styles.footer}></div>
       </div >
-    );
+      );
   }
 }
 
@@ -124,7 +124,7 @@ let styles = {
     minHeight: '50px',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent:'center',
+    justifyContent: 'center',
     flex: '[1 0 5%]'
   },
   footer: {

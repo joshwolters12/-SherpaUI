@@ -10,12 +10,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "fs-extra": "^3.0.1",
+    "os-homedir": "^1.0.2",
     "ovrui": "^1.1.0",
     "react": "~15.4.1",
     "react-native": "~0.42.0",
-    "three": "^0.80.1",
     "react-vr": "^1.1.0",
-    "react-vr-web": "^1.1.0"
+    "react-vr-web": "^1.1.0",
+    "three": "^0.80.1"
   },
   "devDependencies": {
     "babel-jest": "^19.0.0",
