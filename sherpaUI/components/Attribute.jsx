@@ -18,8 +18,10 @@ class Attribute extends Component {
             backgroundColor: this.state.backgroundColor,
             borderColorBottom: 'black',
             borderColorRight: 'black',
+            borderWidth: '1px',
             borderRadius: '3px',
-            margin: '0 auto'
+            margin: '0 auto',
+            fontSize:'12px'
         }
         return (
             <div style={styles.attributeContainer}>
@@ -116,7 +118,8 @@ let styles = {
         height: '50px',
         display: 'inline-block',
         verticalAlign: 'middle',
-        padding: '5px'
+        padding: '5px',
+        fontSize: '11px'
     },
     inputMedium: {
         borderRadius: '3px',
@@ -128,7 +131,8 @@ let styles = {
         height: '25px',
         display: 'inline-block',
         verticalAlign: 'middle',
-        padding: '5px'
+        padding: '5px',
+        fontSize: '11px'
     },
     inputSmall: {
         borderRadius: '3px',
@@ -140,7 +144,8 @@ let styles = {
         height: '25px',
         display: 'inline-block',
         verticalAlign: 'middle',
-        padding: '5px'
+        padding: '5px',
+        fontSize: '11px'
     }
 }
 

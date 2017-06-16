@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { SegmentedControl, SegmentedControlItem, Text } from 'react-desktop/macOs';
 import Gui from '../components/Gui';
+import Publish from '../components/Publish';
+import Open from '../components/Open';
+
+const exec = require('child_process').exec
 const fs = require('fs-extra');
 var data = require('../starterReactVR/myjsonfile.json');
 import { BrowserWindow, dialog } from 'electron';
 
 console.log(dialog)
+
 
 export default class Main extends Component {
   constructor() {
@@ -16,6 +21,7 @@ export default class Main extends Component {
     this.writeToFile = this.writeToFile.bind(this)
     this.setState = this.setState.bind(this)
     this.chooseImage = this.chooseImage.bind(this)
+    this.publish = this.publish.bind(this)
   }
 
   selectPage(page) {
@@ -37,6 +43,10 @@ export default class Main extends Component {
     this.setState({
       loadURL: this.state.loadURL + Date.now()
     })
+  }
+
+  publish(){
+    exec("npm run publish")
   }
 
   chooseImage() {
@@ -71,13 +81,20 @@ export default class Main extends Component {
   }
 
   render() {
-        return(
-      <div id= 'appcontainer' style= { styles.appcontainer } >
-      <div id="headspacer" style={styles.header}>
-        <div style={styles.logo}>
-          <img src="./starterReactVR/static_assets/sherpa.png" />
+
+    return (
+      <div id='appcontainer' style={styles.appcontainer} >
+        <div id="headspacer" style={styles.header}>
+          <Open/>
+          <div style={styles.logo}>
+            <img src="./starterReactVR/static_assets/sherpa.png" />
+          </div>
+          <Publish
+            publish = {this.publish}
+          />
         </div>
       </div>
+
       <Gui
         data={this.state}
         selectPage={this.selectPage}
@@ -99,13 +116,17 @@ let styles = {
     width: '100%',
     height: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   header: {
     height: "8%",
+    width: "100%",
+    minWidth: '800px',
     minHeight: '50px',
-    flex: '[1 0 5%]',
-    display: 'flex'
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent:'center',
+    flex: '[1 0 5%]'
   },
   footer: {
     height: '2%',
@@ -113,8 +134,10 @@ let styles = {
     flex: '[1 0 10%]',
   },
   logo: {
-    width: '200px',
-    height: '48px',
+    minWidth: '145px',
+    minHeight: '30px',
+    maxWidth: '190px',
+    maxHeight: '42px',
     margin: 'auto',
     alignItems: 'center'
   }

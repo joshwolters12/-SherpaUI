@@ -6,7 +6,7 @@ class Properties extends Component {
         let styles = {
             properties: {
                 height: 'auto',
-                width: '30%',
+                width: '25%',
                 minWidth: '240px',
                 display: 'flex',
                 flexDirection: 'column',
