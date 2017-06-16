@@ -12,7 +12,7 @@ class Open extends Component {
                 height: '35px',
                 alignSelf: 'left',
                 float: 'left',
-                margin: 'auto 0px auto 20px'
+                margin: 'auto -260px auto 20px'
                 
             },
             button:{
@@ -28,7 +28,7 @@ class Open extends Component {
 
         return (
             <div style={styles.publishContainer}>
-                <button style={styles.button}>Open Project...</button>
+                <button style={styles.button}>+ Save Project</button>
             </div>
         )
     }

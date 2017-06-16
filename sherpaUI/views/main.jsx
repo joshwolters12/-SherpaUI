@@ -3,11 +3,13 @@ import { SegmentedControl, SegmentedControlItem, Text } from 'react-desktop/macO
 import Gui from '../components/Gui';
 import Publish from '../components/Publish';
 import Open from '../components/Open';
+import Save from '../components/Save';
 
 const exec = require('child_process').exec
 const fs = require('fs-extra');
 var data = require('../starterReactVR/myjsonfile.json');
 const dialog = require('electron').remote.dialog;
+const {BrowserWindow} = require('electron').remote
 
 
 export default class Main extends Component {
@@ -20,12 +22,28 @@ export default class Main extends Component {
     this.setState = this.setState.bind(this)
     this.chooseImage = this.chooseImage.bind(this)
     this.publish = this.publish.bind(this)
+    this.openWindow = this.openWindow.bind(this)
+    this.updateName = this.updateName.bind(this)
   }
 
   selectPage(page) {
     this.setState({
       currView: page
     });
+  }
+
+  openWindow(){
+    let win = new BrowserWindow({width: 800, height: 600})
+      win.on('closed', () => {
+      win = null
+    })
+    win.loadURL(this.state.loadURL)
+  }
+
+  updateName(event){
+    let newState = this.state
+    newState[event.target.name] = event.target.value;
+    this.setState(newState)
   }
 
   updateProperties(event) {
@@ -87,6 +105,7 @@ export default class Main extends Component {
       <div id='appcontainer' style={styles.appcontainer} >
         <div id="headspacer" style={styles.header}>
           <Open/>
+          <Save/>
           <div style={styles.logo}>
             <img src="./starterReactVR/static_assets/sherpa.png" />
           </div>
@@ -95,13 +114,15 @@ export default class Main extends Component {
       />
         </div>
         <Gui
-      data={this.state}
-      selectPage={this.selectPage}
-      updateProperties={this.updateProperties}
-      writeToFile={this.writeToFile}
-      loadURL={this.state.loadURL}
-      imageURL={this.state.imageURL}
-      chooseImage={this.chooseImage}
+          data={this.state}
+          selectPage={this.selectPage}
+          updateProperties={this.updateProperties}
+          writeToFile={this.writeToFile}
+          loadURL={this.state.loadURL}
+          imageURL={this.state.imageURL}
+          chooseImage={this.chooseImage}
+          openWindow={this.openWindow}
+          updateName={this.updateName}
       ></Gui>
         <div id="footer" style={styles.footer}></div>
       </div >

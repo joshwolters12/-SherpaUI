@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CoordinatesAndScaling from '../components/CoordinatesAndScaling';
+import Project from '../components/Project';
 
 class Properties extends Component {
     render() {
@@ -17,6 +18,12 @@ class Properties extends Component {
         }
         return (
             <div style={styles.properties}>
+                <Project
+                    data={this.props.data}
+                    updateProperties={this.props.updateProperties}
+                    writeToFile = {this.props.writeToFile}
+                    updateName = {this.props.updateName}
+                />
                 <CoordinatesAndScaling
                     data={this.props.data}
                     updateProperties={this.props.updateProperties}
