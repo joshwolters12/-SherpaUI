@@ -7,9 +7,7 @@ import Open from '../components/Open';
 const exec = require('child_process').exec
 const fs = require('fs-extra');
 var data = require('../starterReactVR/myjsonfile.json');
-import { BrowserWindow, dialog } from 'electron';
-
-console.log(dialog)
+const dialog = require('electron').remote.dialog;
 
 
 export default class Main extends Component {
@@ -45,43 +43,46 @@ export default class Main extends Component {
     })
   }
 
-  publish(){
+  publish() {
     exec("npm run publish")
   }
 
   chooseImage() {
-    console.log('choosing image')
-    dialog.showOpenDialog({
-      filters: [
-        {
-          name: 'Images',
-          extensions: ['jpg', 'png', 'gif']
+    let _this = this;
+    new Promise((resolve, reject) => {
+      dialog.showOpenDialog({
+        filters: [
+          {
+            name: 'Images',
+            extensions: ['jpg', 'png', 'gif']
+          }
+        ]
+      }, function(filePath) {
+        if (filePath === undefined) return;
+        let imageToLoad = filePath[0].split("/").pop();
+        let pathLength = filePath[0].split("/").length;
+        let pathMatch = filePath[0].split("/").slice(pathLength - 3, pathLength).join("/");
+
+        if (pathMatch !== 'starterReactVR/static_assets/' + imageToLoad) {
+          console.log('filePath', filePath)
+          console.log('saveURI', 'starterReactVR/static_assets/' + imageToLoad)
+          fs.copy(filePath.toString(), 'starterReactVR/static_assets/' + imageToLoad, function(err) {
+            if (err) return console.log(err)
+            resolve(imageToLoad)
+          })
+        } else {
+          resolve(imageToLoad)
         }
-      ]
-    }, function (filePath) {
-      if (filePath === undefined) return;
-      let imageToLoad = filePath[0].split("/").pop()
-
-      fs.copy(filePath.toString(), 'starterReactVR/static_assets/' + imageToLoad, function (err) {
-        if (err) return console.log(err)
       })
-
-      fs.readFile('starterReactVR/myjsonfile.json', 'utf8', function (err, data) {
-        let obj = JSON.parse(data)
-        obj.imageURL = imageToLoad
-        let json = JSON.stringify(obj, null, 2)
-
-        fs.writeFile('./starterReactVR/myjsonfile.json', json, 'utf8', function (err) {
-          if (err) return console.log(err)
-          mainWindow.reload()
-        })
-
-      })
+    }).then((imageURL) => {
+      let newState = _this.state;
+      newState.imageURL = imageURL
+      this.setState(newState)
+      this.writeToFile()
     })
   }
 
   render() {
-
     return (
       <div id='appcontainer' style={styles.appcontainer} >
         <div id="headspacer" style={styles.header}>
@@ -90,21 +91,19 @@ export default class Main extends Component {
             <img src="./starterReactVR/static_assets/sherpa.png" />
           </div>
           <Publish
-            publish = {this.publish}
-          />
+      publish = {this.publish}
+      />
         </div>
-      </div>
-
-      <Gui
-        data={this.state}
-        selectPage={this.selectPage}
-        updateProperties={this.updateProperties}
-        writeToFile={this.writeToFile}
-        loadURL={this.state.loadURL}
-        imageURL={this.state.imageURL}
-        chooseImage = {this.chooseImage}
+        <Gui
+      data={this.state}
+      selectPage={this.selectPage}
+      updateProperties={this.updateProperties}
+      writeToFile={this.writeToFile}
+      loadURL={this.state.loadURL}
+      imageURL={this.state.imageURL}
+      chooseImage={this.chooseImage}
       ></Gui>
-      <div id="footer" style={styles.footer}></div>
+        <div id="footer" style={styles.footer}></div>
       </div >
       );
   }
@@ -125,7 +124,7 @@ let styles = {
     minHeight: '50px',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent:'center',
+    justifyContent: 'center',
     flex: '[1 0 5%]'
   },
   footer: {
