@@ -3,9 +3,12 @@ import { SegmentedControl, SegmentedControlItem, Text } from 'react-desktop/macO
 import Gui from '../components/Gui';
 import Publish from '../components/Publish';
 import Open from '../components/Open';
+
+const exec = require('child_process').exec
 const fs = require('fs-extra');
 var data = require('../starterReactVR/myjsonfile.json');
 const dialog = require('electron').remote.dialog;
+
 
 export default class Main extends Component {
   constructor() {
@@ -16,6 +19,7 @@ export default class Main extends Component {
     this.writeToFile = this.writeToFile.bind(this)
     this.setState = this.setState.bind(this)
     this.chooseImage = this.chooseImage.bind(this)
+    this.publish = this.publish.bind(this)
   }
 
   selectPage(page) {
@@ -37,6 +41,10 @@ export default class Main extends Component {
     this.setState({
       loadURL: this.state.loadURL + Date.now()
     })
+  }
+
+  publish(){
+    exec("npm run publish")
   }
 
   chooseImage() {
@@ -82,7 +90,9 @@ export default class Main extends Component {
           <div style={styles.logo}>
             <img src="./starterReactVR/static_assets/sherpa.png" />
           </div>
-          <Publish/>
+          <Publish
+            publish = {this.publish}
+          />
         </div>
         <Gui
           data={this.state}
@@ -123,8 +133,10 @@ let styles = {
     flex: '[1 0 10%]',
   },
   logo: {
-    width: '150px',
-    height: '35px',
+    minWidth: '145px',
+    minHeight: '30px',
+    maxWidth: '190px',
+    maxHeight: '42px',
     margin: 'auto',
     alignItems: 'center'
   }

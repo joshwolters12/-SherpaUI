@@ -13,9 +13,9 @@ class Publish extends Component {
                 alignSelf: 'right',
                 float: 'right',
                 margin: 'auto 20px auto -120px'
-                
+
             },
-            button:{
+            button: {
                 width: '100%',
                 height: '100%',
                 fontSize: '12px',
@@ -28,7 +28,10 @@ class Publish extends Component {
 
         return (
             <div style={styles.publishContainer}>
-                <button style={styles.button}>Publish Project</button>
+                <button
+                    style={styles.button}
+                    onClick={this.props.publish}
+                >Publish Project</button>
             </div>
         )
     }
