@@ -68,7 +68,7 @@ export default class Main extends Component {
       console.log('Writing Changes to File')
     });
     this.setState({
-      loadURL: this.state.loadURL + Date.now()
+      loadURL: "http://localhost:8081/vr/?" + Date.now()
     })
   }
 

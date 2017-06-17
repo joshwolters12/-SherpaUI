@@ -63,7 +63,7 @@ function init(bundle, parent, options) {
   const teleportModule = new TeleportModule();
   const vr = new VRInstance(bundle, 'starterReactVR', parent, {
     // Add custom options here
-    enableHotReload: true,
+    enableHotReload: false,
     nativeModules: [ teleportModule ],
     // camera: camera,
     ...options,
