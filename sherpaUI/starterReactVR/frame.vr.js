@@ -15,6 +15,7 @@ export default class Frame extends Component {
         <Text style={{
                 transform: [ {translate: this.props.translate}, {rotateY: this.props.rotateY}], 
                 fontSize: .5,
+                color: 'blue'
               }}>
               {this.props.title}
         </Text>
@@ -24,6 +25,7 @@ export default class Frame extends Component {
         <Text style={{
                 transform: [ {translate: this.props.translate}, {rotateY: this.props.rotateY}], 
                 fontSize: .2,
+                color: 'orange'
               }}>
               {this.props.text}
         </Text>
@@ -31,7 +33,7 @@ export default class Frame extends Component {
 
        
         {/*NAV LEFT*/}
-        <VrButton 
+        {/*<VrButton 
           style={{
             transform: [ {translate: this.props.translate}, {rotateY: this.props.rotateY}],
             flexDirection: 'row', 
@@ -42,11 +44,11 @@ export default class Frame extends Component {
           <Text style={{
                   fontSize: .15,
                 }}>girlBye</Text>
-        </VrButton>
+        </VrButton>*/}
         {/*NAV LEFT*/}
 
         {/*NAV RIGHT*/}
-        <VrButton 
+        {/*<VrButton 
           style={{
             transform: [ {translate: this.props.translate}, {rotateY: this.props.rotateY}],
             flexDirection: 'row', 
@@ -57,7 +59,7 @@ export default class Frame extends Component {
                 }}>bitchMove</Text>
           <Image source={asset('arrowright.png')}
                   style={{width: .4, height: .4}} />
-        </VrButton>
+        </VrButton>*/}
         {/*NAV RIGHT*/}
 
       </View>
