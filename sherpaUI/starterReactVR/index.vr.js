@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleSheet, Scene, VrHeadModel, VideoPano } from 'react-vr';
+import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleSheet, Scene, VrHeadModel, Image } from 'react-vr';
 import Frame from './frame.vr.js';
+import Nav from './nav.vr.js'
 
 const data = require('./myjsonfile.json');
 const width = 5;
@@ -10,6 +11,7 @@ export default class starterReactVR extends Component {
   constructor() {
     super();
     this.state = data;
+    this.state.sceneRotateX = 0;
     if(data.currView === 'front') 
       this.state.sceneRotateY = 0;
     if(data.currView === 'right')
@@ -19,7 +21,6 @@ export default class starterReactVR extends Component {
     if(data.currView === 'left')
       this.state.sceneRotateY = 90;
 
-    this.state.sceneRotateX = 0;
     this.navigate = this.navigate.bind(this);
   }
 
@@ -62,8 +63,16 @@ export default class starterReactVR extends Component {
                    text={this.state.front.text} 
                    translate={[-width/2, 1.5, -5]} 
                    rotateY={0}
-                   navigate={this.navigate}/> 
+                   navigate={this.navigate}/>
           </View>
+          <Nav direction={'left'}
+                translate={[-width-.5, 0, -5]} 
+                rotateY={0}
+                navigate={this.navigate}/>
+          <Nav direction={'right'}
+                translate={[.5, 0, -5]} 
+                rotateY={0}
+                navigate={this.navigate}/>
 
           <View style={styles.container}>
             <Frame title={this.state.right.title}
@@ -72,6 +81,14 @@ export default class starterReactVR extends Component {
                    rotateY={270}
                    navigate={this.navigate}/>
           </View>
+          <Nav direction={'left'}
+                translate={[5-width/2, 0, -width/2-.5]} 
+                rotateY={270}
+                navigate={this.navigate}/>
+          <Nav direction={'right'}
+                translate={[5-width/2, 0, width/2+.5]} 
+                rotateY={270}
+                navigate={this.navigate}/>
 
           <View style={styles.container}>
             <Frame title={this.state.back.title}
@@ -80,6 +97,14 @@ export default class starterReactVR extends Component {
                    rotateY={180}
                    navigate={this.navigate}/>
           </View>
+          <Nav direction={'left'}
+                translate={[.5, 0, 5]} 
+                rotateY={180}
+                navigate={this.navigate}/>
+          <Nav direction={'right'}
+                translate={[-width-.5, 0, 5]} 
+                rotateY={180}
+                navigate={this.navigate}/>
 
           <View style={styles.container}>
             <Frame title={this.state.left.title}
@@ -88,6 +113,14 @@ export default class starterReactVR extends Component {
                    rotateY={90}
                    printLocation={this.printLocation}
                    navigate={this.navigate}/>
+            <Nav direction={'left'}
+                 translate={[-5-width/2, 0, width/2+.5]} 
+                 rotateY={90}
+                 navigate={this.navigate}/>
+            <Nav direction={'right'}
+                 translate={[-5-width/2, 0, -width/2-.5]} 
+                 rotateY={90}
+                 navigate={this.navigate}/>
           </View>
 
         </View>
@@ -95,14 +128,16 @@ export default class starterReactVR extends Component {
     )
   }
 }
-;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     position: 'absolute',
     width: width,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    // justifyContent: 'center',
+    // textAlign: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
   }
 })
 
