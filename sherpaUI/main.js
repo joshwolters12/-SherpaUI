@@ -58,8 +58,8 @@ app.on('ready', () => {
               if (err) return console.log(err)
             })
           })
-          fs.copy(filePaths[0], './starterReactVR/static_assets' + newImage)
-          BrowserWindowc.reload()
+          fs.copy(filePaths[0], './starterReactVR/static_assets/' + newImage)
+          mainWindow.reload()
         })
 
 

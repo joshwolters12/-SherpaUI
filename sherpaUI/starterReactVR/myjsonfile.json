@@ -1,7 +1,7 @@
 {
   "projectName": "",
-  "imageURL": "island-garden.jpg",
-  "loadURL": "http://localhost:8081/vr/?1497737977874",
+  "imageURL": "sherpa_logo_icons.png",
+  "loadURL": "http://localhost:8081/vr/?1497740722307",
   "currView": "left",
   "front": {
     "title": "",
