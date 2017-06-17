@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleSheet, Scene, VrHeadModel } from 'react-vr';
+import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleSheet, Scene, VrHeadModel, Image } from 'react-vr';
 import Frame from './frame.vr.js';
 import Nav from './nav.vr.js'
 
