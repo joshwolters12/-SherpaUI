@@ -8,22 +8,26 @@ export default class Nav extends Component {
     }
 
   render() {
-    console.log('this.props: ',this.props)
+    console.log('in the nav render funtion');
+    console.log('props: ', this.props);
+    let multiplier = this.props.direction === 'left' ? 1 : -1;
     return (
-      <View>
-        <VrButton 
-          style={{
-            transform: [{translate: [this.props.translate]}, {rotateY: this.props.rotateY}],
-            flexDirection: 'row', 
-          }}
-          onClick={() => this.props.navigate(this.props.rotateY, -1)}>
-          <Text style={{
-                  fontSize: .15,
-                }}>{this.props.direction}</Text>
-          <Image source={asset('arrowright.png')}
-                  style={{width: .4, height: .4}} />
-        </VrButton>
-      </View>
+        <View style={{
+                flex: 1,
+                position: 'absolute',
+                width: 5,
+                alignItems: 'center',
+                flexDirection: 'column',
+              }}>
+            <VrButton onClick={() => this.props.navigate(this.props.rotateY, multiplier)}>
+                <Image source={asset(`arrow`+this.props.direction+`.png`)}
+                    style={{ width: .4, 
+                                height: .4,
+                                transform: [ {translate: this.props.translate}, {rotateY: this.props.rotateY}],
+                            }}
+                />
+            </VrButton>
+        </View>
     )
   }
 };

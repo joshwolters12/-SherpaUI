@@ -64,15 +64,15 @@ export default class starterReactVR extends Component {
                    translate={[-width/2, 1.5, -5]} 
                    rotateY={0}
                    navigate={this.navigate}/>
-            <Nav direction={'left'}
-                 translate={[-width/2, 1.5, -5]} 
-                 rotateY={0}
-                 navigate={this.navigate}/>
-            <Nav direction={'right'}
-                 translate={[-width/2, 1.5, -5]} 
-                 rotateY={0}
-                 navigate={this.navigate}/>
           </View>
+          <Nav direction={'left'}
+                translate={[-width-.5, 0, -5]} 
+                rotateY={0}
+                navigate={this.navigate}/>
+          <Nav direction={'right'}
+                translate={[.5, 0, -5]} 
+                rotateY={0}
+                navigate={this.navigate}/>
 
           <View style={styles.container}>
             <Frame title={this.state.right.title}
@@ -80,15 +80,15 @@ export default class starterReactVR extends Component {
                    translate={[5-width/2, 1.5, 0]} 
                    rotateY={270}
                    navigate={this.navigate}/>
-            <Nav direction={'left'}
-                 translate={[-width/2, 1.5, -5]} 
-                 rotateY={0}
-                 navigate={this.navigate}/>
-            <Nav direction={'right'}
-                 translate={[-width/2, 1.5, -5]} 
-                 rotateY={0}
-                 navigate={this.navigate}/>
           </View>
+          <Nav direction={'left'}
+                translate={[5-width/2, 0, -width/2-.5]} 
+                rotateY={270}
+                navigate={this.navigate}/>
+          <Nav direction={'right'}
+                translate={[5-width/2, 0, width/2+.5]} 
+                rotateY={270}
+                navigate={this.navigate}/>
 
           <View style={styles.container}>
             <Frame title={this.state.back.title}
@@ -96,15 +96,15 @@ export default class starterReactVR extends Component {
                    translate={[-width/2, 1.5, 5]} 
                    rotateY={180}
                    navigate={this.navigate}/>
-            <Nav direction={'left'}
-                 translate={[-width/2, 1.5, -5]} 
-                 rotateY={0}
-                 navigate={this.navigate}/>
-            <Nav direction={'right'}
-                 translate={[-width/2, 1.5, -5]} 
-                 rotateY={0}
-                 navigate={this.navigate}/>
           </View>
+          <Nav direction={'left'}
+                translate={[.5, 0, 5]} 
+                rotateY={180}
+                navigate={this.navigate}/>
+          <Nav direction={'right'}
+                translate={[-width-.5, 0, 5]} 
+                rotateY={180}
+                navigate={this.navigate}/>
 
           <View style={styles.container}>
             <Frame title={this.state.left.title}
@@ -114,12 +114,12 @@ export default class starterReactVR extends Component {
                    printLocation={this.printLocation}
                    navigate={this.navigate}/>
             <Nav direction={'left'}
-                 translate={[-width/2, 1.5, -5]} 
-                 rotateY={0}
+                 translate={[-5-width/2, 0, width/2+.5]} 
+                 rotateY={90}
                  navigate={this.navigate}/>
             <Nav direction={'right'}
-                 translate={[-width/2, 1.5, -5]} 
-                 rotateY={0}
+                 translate={[-5-width/2, 0, -width/2-.5]} 
+                 rotateY={90}
                  navigate={this.navigate}/>
           </View>
 
@@ -128,14 +128,16 @@ export default class starterReactVR extends Component {
     )
   }
 }
-;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     position: 'absolute',
     width: width,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    // justifyContent: 'center',
+    // textAlign: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
   }
 })
 
