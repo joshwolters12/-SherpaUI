@@ -9,14 +9,17 @@ export default class Frame extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{
+              transform: [ {translate: this.props.translate}, 
+                           {rotateY: this.props.rotateY},
+                           {rotateX: this.props.rotateX} ], 
+              backgroundColor: 'rgba(0, 0, 0, 0.3)'
+            }}>
 
         {/*TITLE*/}
         <Text style={{
-                transform: [ {translate: this.props.translate}, {rotateY: this.props.rotateY}], 
                 fontSize: .5,
                 color: 'white',
-                backgroundColor: 'rgba(0, 0, 0, 0.3)',
               }}>
               {this.props.title}
         </Text>
@@ -24,10 +27,8 @@ export default class Frame extends Component {
 
         {/*TEXT*/}
         <Text style={{
-                transform: [ {translate: this.props.translate}, {rotateY: this.props.rotateY}], 
                 fontSize: .2,
                 color: 'white',
-                backgroundColor: 'rgba(0, 0, 0, 0.3)',
               }}>
               {this.props.text}
         </Text>

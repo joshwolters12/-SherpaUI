@@ -12,6 +12,7 @@ export default class starterReactVR extends Component {
     super();
     this.state = data;
     this.state.sceneRotateX = 0;
+    this.state.sceneRotateY = 0;
     if(data.currView === 'front') 
       this.state.sceneRotateY = 0;
     if(data.currView === 'right')
@@ -21,10 +22,31 @@ export default class starterReactVR extends Component {
     if(data.currView === 'left')
       this.state.sceneRotateY = 90;
 
-    this.navigate = this.navigate.bind(this);
+    this.navigateY = this.navigateY.bind(this);
   }
 
-  navigate(frameDeg, direction) {
+  navigateY(frameDeg, direction) {
+    console.log('....navnavnavnavnavnavnavnav....')
+    let rotationY = VrHeadModel.rotationOfHeadMatrix()[1]*180/(Math.PI);
+    while(rotationY >= 360) rotationY-=360;
+    while(rotationY < 0) rotationY+=360;
+    let goTo = frameDeg + direction*90;
+    while(goTo >= 360) goTo-=360;
+    while(goTo < 0) goTo+=360;
+    const degToRot = goTo - rotationY;
+    let updateSceneRotateY = this.state.sceneRotateY+degToRot;
+    while(updateSceneRotateY >= 360) updateSceneRotateY-=360;
+    while(updateSceneRotateY < 0) updateSceneRotateY+=360;
+
+    console.log('rotationY: ', rotationY);
+    console.log('frameDeg: ', frameDeg);
+    console.log('goTo: ', goTo);
+    console.log('state.sceneRotateY', this.state.sceneRotateY);
+    
+    this.setState({sceneRotateY: updateSceneRotateY});
+  }
+
+  navigateDown(frameDeg, direction) {
     console.log('....navnavnavnavnavnavnavnav....')
     let rotationY = VrHeadModel.rotationOfHeadMatrix()[1]*180/(Math.PI);
     while(rotationY >= 360) rotationY-=360;
@@ -57,73 +79,119 @@ export default class starterReactVR extends Component {
         <View>
 
           <Pano source={asset(this.state.imageURL)}></Pano>
-
+          
+          {/*FRONT*/}
           <View style={styles.container}>
             <Frame title={this.state.front.title}
                    text={this.state.front.text} 
                    translate={[-width/2, 1.5, -5]} 
                    rotateY={0}
-                   navigate={this.navigate}/>
+                   rotateX={0}/>
           </View>
           <Nav direction={'left'}
                 translate={[-width-.5, 0, -5]} 
                 rotateY={0}
-                navigate={this.navigate}/>
+                rotateX={0}
+                navigateY={this.navigateY}/>
           <Nav direction={'right'}
                 translate={[.5, 0, -5]} 
                 rotateY={0}
-                navigate={this.navigate}/>
+                rotateX={0}
+                navigateY={this.navigateY}/>
+          {/*FRONT*/}
 
+          {/*RIGHT*/}
           <View style={styles.container}>
             <Frame title={this.state.right.title}
                    text={this.state.right.text} 
                    translate={[5-width/2, 1.5, 0]} 
                    rotateY={270}
-                   navigate={this.navigate}/>
+                   rotateX={0}/>
           </View>
           <Nav direction={'left'}
                 translate={[5-width/2, 0, -width/2-.5]} 
                 rotateY={270}
-                navigate={this.navigate}/>
+                rotateX={0}
+                navigateY={this.navigateY}/>
           <Nav direction={'right'}
                 translate={[5-width/2, 0, width/2+.5]} 
                 rotateY={270}
-                navigate={this.navigate}/>
+                rotateX={0}
+                navigateY={this.navigateY}/>
+          {/*RIGHT*/}
 
+          {/*BACK*/}
           <View style={styles.container}>
             <Frame title={this.state.back.title}
                    text={this.state.back.text} 
                    translate={[-width/2, 1.5, 5]} 
                    rotateY={180}
-                   navigate={this.navigate}/>
+                   rotateX={0}/>
           </View>
           <Nav direction={'left'}
                 translate={[.5, 0, 5]} 
                 rotateY={180}
-                navigate={this.navigate}/>
+                rotateX={0}
+                navigateY={this.navigateY}/>
           <Nav direction={'right'}
                 translate={[-width-.5, 0, 5]} 
                 rotateY={180}
-                navigate={this.navigate}/>
+                rotateX={0}
+                navigateY={this.navigateY}/>
+          {/*BACK*/}
 
+          {/*LEFT*/}
           <View style={styles.container}>
             <Frame title={this.state.left.title}
                    text={this.state.left.text} 
                    translate={[-5-width/2, 1.5, 0]} 
                    rotateY={90}
-                   printLocation={this.printLocation}
-                   navigate={this.navigate}/>
-            <Nav direction={'left'}
-                 translate={[-5-width/2, 0, width/2+.5]} 
-                 rotateY={90}
-                 navigate={this.navigate}/>
-            <Nav direction={'right'}
-                 translate={[-5-width/2, 0, -width/2-.5]} 
-                 rotateY={90}
-                 navigate={this.navigate}/>
+                   rotateX={0}/>
           </View>
+          <Nav direction={'left'}
+                translate={[-5-width/2, 0, width/2+.5]} 
+                rotateY={90}
+                rotateX={0}
+                navigateY={this.navigateY}/>
+          <Nav direction={'right'}
+                translate={[-5-width/2, 0, -width/2-.5]} 
+                rotateY={90}
+                rotateX={0}
+                navigateY={this.navigateY}/>
+          {/*LEFT*/}
+
 
         </View>
+          {/*TOP*/}
+          <View style={styles.container}>
+            <Frame title={this.state.left.title}
+                   text={this.state.left.text} 
+                   translate={[-width/2, 5, 0]} 
+                   rotateY={0}
+                   rotateX={90}/>
+          </View>
+          {/*TEMP NAV DOWN BUTTON*/}
+            <View style={{
+                  flex: 1,
+                  position: 'absolute',
+                  width: 5,
+                  alignItems: 'center',
+                  flexDirection: 'column',
+                }}
+            >
+                <VrButton onClick={() => this.state.navigateDown}>
+                    <Image source={asset(`arrowdown.png`)}
+                        style={{ width: .4, 
+                                height: .4,
+                                transform: [{translate: [-width/2, 5, -width/2]}, 
+                                            {rotateY: 0},
+                                            {rotateX: 90}],
+                              }}
+                    />
+                </VrButton>
+            </View>
+            {/*TEMP NAV DOWN BUTTON*/}
+          {/*TOP*/}
       </Scene>
     )
   }
