@@ -6,6 +6,7 @@ const MenuItem = require('electron').MenuItem
 const shell = require('electron').shell;
 const exec = require('child_process').exec;
 const fs = require('fs-extra');
+const touch = require('touch');
 const defaultMenu = require('electron-default-menu');
 
 let mainWindow = null;
@@ -18,8 +19,8 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
 
-
   const menu = defaultMenu(app, shell);
+
   menu.splice(1, 0, {
     label: 'File',
     submenu: [{
@@ -74,11 +75,17 @@ app.on('ready', () => {
     },
       {
         label: 'Save As...',
-        accelerator: 'Shift+CmdOrCtrl+S'
-        //copy myjson.json
-        //rename to projectName
-        //move to projects folder
-
+        accelerator: 'Shift+CmdOrCtrl+S',
+        click: (item, focusedWindow) => {
+          dialog.showSaveDialog({
+            buttonLabel: "Save Project",
+            defaultPath: './starterReactVR/saved_projects/',
+            nameFieldLabel: "Project Name"
+          }, function(filename) {
+            let fileToSave = filename.split('/').pop()
+            fs.rename('./starterReactVR/myjsonfile.json', './starterReactVR/saved_projects/' + fileToSave)
+          })
+        }
       },
       {
         label: 'Export Project...',
