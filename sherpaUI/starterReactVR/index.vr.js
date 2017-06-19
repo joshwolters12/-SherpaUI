@@ -87,7 +87,7 @@ export default class starterReactVR extends Component {
                   {rotateY: this.state.sceneRotateY},
                 ]
             }}>
-        <View>
+ 
 
           <Pano source={asset(this.state.imageURL)}></Pano>
           
@@ -172,17 +172,16 @@ export default class starterReactVR extends Component {
           {/*LEFT*/}
 
 
-        </View>
           {/*TOP*/}
-          <View style={styles.container}>
+          {/*<View style={styles.container}>
             <Frame title={this.state.left.title}
                    text={this.state.left.text} 
                    translate={[-width/2, 5, 0]} 
                    rotateY={0}
                    rotateX={90}/>
-          </View>
+          </View>*/}
           {/*TEMP NAV DOWN BUTTON*/}
-            <View style={{
+            {/*<View style={{
                   flex: 1,
                   position: 'absolute',
                   width: 5,
@@ -200,9 +199,10 @@ export default class starterReactVR extends Component {
                               }}
                     />
                 </VrButton>
-            </View>
+            </View>*/}
             {/*TEMP NAV DOWN BUTTON*/}
           {/*TOP*/}
+
       </Scene>
     )
   }
