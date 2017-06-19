@@ -18,8 +18,8 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
 
+
   const menu = defaultMenu(app, shell);
-  console.log(menu[0])
   menu.splice(1, 0, {
     label: 'File',
     submenu: [{
@@ -36,9 +36,6 @@ app.on('ready', () => {
               extensions: ['jpg', 'png', 'gif']
             }
           ]
-          //update image path
-          //erase object properties in json object
-
         }, function(filePaths) {
           let newImage = filePaths[0].split('/').pop()
           fs.readFile('./starterReactVR/myjsonfile.json', function(err, data) {
@@ -61,19 +58,27 @@ app.on('ready', () => {
           fs.copy(filePaths[0], './starterReactVR/static_assets/' + newImage)
           mainWindow.reload()
         })
-
-
       }
     }, {
       label: 'Open Project...',
       accelerator: 'CmdOrCtrl+O'
+    //read saved json file
+    //rewrite myjson.json
     }, {
       label: 'Save',
-      accelerator: 'CmdOrCtrl+S'
+      accelerator: 'CmdOrCtrl+S',
+      click: () => {
+        //trigger "update" button keypress
+      }
+
     },
       {
         label: 'Save As...',
         accelerator: 'Shift+CmdOrCtrl+S'
+        //copy myjson.json
+        //rename to projectName
+        //move to projects folder
+
       },
       {
         label: 'Export Project...',
