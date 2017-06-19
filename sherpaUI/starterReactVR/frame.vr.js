@@ -9,74 +9,30 @@ export default class Frame extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{
+              transform: [ {translate: this.props.translate},
+                           {rotateY: this.props.rotateY},
+                           {rotateX: this.props.rotateX} ],
+              backgroundColor: 'rgba(0, 0, 0, 0.3)'
+            }}>
 
         { /*TITLE*/ }
         <Text style={{
-        transform: [{
-          translate: this.props.translate
-        }, {
-          rotateY: this.props.rotateY
-        }],
-        fontSize: .5,
-      }}>
+                fontSize: .5,
+                color: 'white',
+              }}>
               {this.props.title}
         </Text>
         { /*TITLE*/ }
 
         { /*TEXT*/ }
         <Text style={{
-        transform: [{
-          translate: this.props.translate
-        }, {
-          rotateY: this.props.rotateY
-        }],
-        fontSize: .2,
-      }}>
+                fontSize: .2,
+                color: 'white',
+              }}>
               {this.props.text}
         </Text>
         { /*TEXT*/ }
-
-        <View>
-          { /*NAV LEFT*/ }
-          <VrButton
-      style={{
-        transform: [{
-          translate: this.props.translate
-        }, {
-          rotateY: this.props.rotateY
-        }],
-        flexDirection: 'row',
-      }}
-      onClick={() => this.props.navigate(this.props.rotateY, 1)}>
-            <Text style={{
-        fontSize: .15,
-      }}>move to the left</Text>
-              <Image source={asset('arrowleft.png')}
-      style={{
-        width: 1,
-        height: 1
-      }} />
-          </VrButton>
-          { /*NAV LEFT*/ }
-
-          { /*NAV RIGHT*/ }
-          <VrButton
-      style={{
-        transform: [{
-          translate: this.props.translate
-        }, {
-          rotateY: this.props.rotateY
-        }],
-        flexDirection: 'row',
-      }}
-      onClick={() => this.props.navigate(this.props.rotateY, -1)}>
-            <Text style={{
-        fontSize: .15,
-      }}>move to the right</Text>
-          </VrButton>
-          { /*NAV RIGHT*/ }
-        </View>
 
       </View>
     )

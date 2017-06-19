@@ -27,9 +27,20 @@ export default class Main extends Component {
   }
 
   selectPage(page) {
-    this.setState({
-      currView: page
-    });
+    let _this = this;
+    new Promise((resolve,reject)=>{
+      this.setState({
+        currView: page
+      },()=>{resolve()});
+    }).then(()=>{
+      fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state, null, 2), 'utf8', () => {
+        console.log('Writing Changes to File')
+      });
+    }).then(()=>{
+      _this.setState({
+        loadURL: _this.state.loadURL + Date.now()
+      });
+    })
   }
 
   openWindow() {
@@ -60,7 +71,7 @@ export default class Main extends Component {
       console.log('Writing Changes to File')
     });
     this.setState({
-      loadURL: this.state.loadURL + Date.now()
+      loadURL: "http://localhost:8081/vr/?" + Date.now()
     })
   }
 
