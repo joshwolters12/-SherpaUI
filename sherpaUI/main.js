@@ -67,10 +67,20 @@ app.on('ready', () => {
         dialog.showOpenDialog({
           buttonLabel: "Open Project",
           defaultPath: "./starterReactVR/saved_projects/"
+        }, function(filePaths) {
+          if (filePaths) {
+            let fileToOpen = filePaths[0].split('/').pop()
+            fs.readFile('./starterReactVR/saved_projects/' + fileToOpen, function(err, data) {
+              if (err) return console.log(err)
+              fs.writeFile('./starterReactVR/myjsonfile.json', data, function(err) {
+                if (err) return console.log(err)
+              })
+            })
+
+          }
+
         })
       }
-    //read saved json file
-    //rewrite myjson.json
     }, {
       label: 'Save',
       accelerator: 'CmdOrCtrl+S',
@@ -88,14 +98,12 @@ app.on('ready', () => {
             defaultPath: './starterReactVR/saved_projects/',
             nameFieldLabel: "Name:"
           }, function(filename) {
-            if (filename !== undefined) {
+            if (filename) {
               let fileToSave = filename.split('/').pop()
               fs.copy('./starterReactVR/myjsonfile.json', './starterReactVR/saved_projects/' + fileToSave, function(err) {
                 if (err) return console.log(err)
               })
             }
-
-
           })
         }
       },
