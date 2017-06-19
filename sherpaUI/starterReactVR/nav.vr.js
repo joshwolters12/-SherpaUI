@@ -8,8 +8,6 @@ export default class Nav extends Component {
     }
 
   render() {
-    console.log('in the nav render funtion');
-    console.log('props: ', this.props);
     let multiplier = this.props.direction === 'left' ? 1 : -1;
     return (
         <View style={{
@@ -18,13 +16,14 @@ export default class Nav extends Component {
                 width: 5,
                 alignItems: 'center',
                 flexDirection: 'column',
-              }}>
-            <VrButton onClick={() => this.props.navigate(this.props.rotateY, multiplier)}>
+              }}
+        >
+            <VrButton onClick={() => this.props.navigateY(this.props.rotateY, multiplier)}>
                 <Image source={asset(`arrow`+this.props.direction+`.png`)}
-                    style={{ width: .3, 
-                                height: .4,
-                                transform: [ {translate: this.props.translate}, {rotateY: this.props.rotateY}],
-                            }}
+                    style={{ width: .4, 
+                             height: .4,
+                             transform: [ {translate: this.props.translate}, {rotateY: this.props.rotateY}],
+                          }}
                 />
             </VrButton>
         </View>
