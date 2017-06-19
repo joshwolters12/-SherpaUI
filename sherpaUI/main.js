@@ -76,9 +76,7 @@ app.on('ready', () => {
                 if (err) return console.log(err)
               })
             })
-
           }
-
         })
       }
     }, {
@@ -87,7 +85,6 @@ app.on('ready', () => {
       click: () => {
         //trigger "update" button keypress
       }
-
     },
       {
         label: 'Save As...',
@@ -114,10 +111,12 @@ app.on('ready', () => {
           dialog.showMessageBox({
             type: "question",
             message: 'Are you sure you want to Export to Desktop?',
-            buttons: ['OK']
-          }, function() {
-            exec("cd starterReactVR && npm run bundle")
-            console.log('exporting to desktop')
+            buttons: ['OK', 'Cancel']
+          }, function(response) {
+            if (response === 0) {
+              exec("cd starterReactVR && npm run bundle")
+              console.log('exporting to desktop')
+            }
           })
         }
       }
