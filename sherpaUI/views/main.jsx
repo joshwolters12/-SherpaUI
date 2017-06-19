@@ -33,7 +33,7 @@ export default class Main extends Component {
         currView: page
       },()=>{resolve()});
     }).then(()=>{
-      fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state), 'utf8', () => {
+      fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state, null, 2), 'utf8', () => {
         console.log('Writing Changes to File')
       });
     }).then(()=>{
@@ -43,15 +43,18 @@ export default class Main extends Component {
     })
   }
 
-  openWindow(){
-    let win = new BrowserWindow({width: 800, height: 600})
-      win.on('closed', () => {
+  openWindow() {
+    let win = new BrowserWindow({
+      width: 800,
+      height: 600
+    })
+    win.on('closed', () => {
       win = null
     })
     win.loadURL(this.state.loadURL)
   }
 
-  updateName(event){
+  updateName(event) {
     let newState = this.state
     newState[event.target.name] = event.target.value;
     this.setState(newState)
@@ -64,7 +67,7 @@ export default class Main extends Component {
   }
 
   writeToFile() {
-    fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state), 'utf8', () => {
+    fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state, null, 2), 'utf8', () => {
       console.log('Writing Changes to File')
     });
     this.setState({
@@ -125,15 +128,15 @@ export default class Main extends Component {
       />
         </div>
         <Gui
-          data={this.state}
-          selectPage={this.selectPage}
-          updateProperties={this.updateProperties}
-          writeToFile={this.writeToFile}
-          loadURL={this.state.loadURL}
-          imageURL={this.state.imageURL}
-          chooseImage={this.chooseImage}
-          openWindow={this.openWindow}
-          updateName={this.updateName}
+      data={this.state}
+      selectPage={this.selectPage}
+      updateProperties={this.updateProperties}
+      writeToFile={this.writeToFile}
+      loadURL={this.state.loadURL}
+      imageURL={this.state.imageURL}
+      chooseImage={this.chooseImage}
+      openWindow={this.openWindow}
+      updateName={this.updateName}
       ></Gui>
         <div id="footer" style={styles.footer}></div>
       </div >

@@ -24,13 +24,13 @@ export default class Frame extends Component {
           {this.props.title}
 =======
       <View style={{
-              transform: [ {translate: this.props.translate}, 
+              transform: [ {translate: this.props.translate},
                            {rotateY: this.props.rotateY},
-                           {rotateX: this.props.rotateX} ], 
+                           {rotateX: this.props.rotateX} ],
               backgroundColor: 'rgba(0, 0, 0, 0.3)'
             }}>
 
-        {/*TITLE*/}
+        { /*TITLE*/ }
         <Text style={{
                 fontSize: .5,
                 color: 'white',
@@ -38,9 +38,9 @@ export default class Frame extends Component {
               {this.props.title}
 >>>>>>> 17c794cf43b079b5eaa8ee014677fd053ab83c2f
         </Text>
-        {/*TITLE*/}
+        { /*TITLE*/ }
 
-        {/*TEXT*/}
+        { /*TEXT*/ }
         <Text style={{
 <<<<<<< HEAD
           transform: [{ translate: this.props.translate }, { rotateY: this.props.rotateY }],
@@ -56,9 +56,10 @@ export default class Frame extends Component {
               {this.props.text}
 >>>>>>> 17c794cf43b079b5eaa8ee014677fd053ab83c2f
         </Text>
-        {/*TEXT*/}
+        { /*TEXT*/ }
 
       </View>
     )
   }
-};
+}
+;
