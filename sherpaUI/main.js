@@ -9,6 +9,7 @@ const fs = require('fs-extra');
 const touch = require('touch');
 const defaultMenu = require('electron-default-menu');
 
+
 let mainWindow = null;
 
 app.on('window-all-closed', () => {
@@ -18,6 +19,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
+
 
   const menu = defaultMenu(app, shell);
 
@@ -83,7 +85,7 @@ app.on('ready', () => {
       label: 'Save',
       accelerator: 'CmdOrCtrl+S',
       click: () => {
-        //trigger "update" button keypress
+
       }
     },
       {
@@ -103,6 +105,8 @@ app.on('ready', () => {
             }
           })
         }
+      }, {
+        type: 'separator'
       },
       {
         label: 'Export Project...',
@@ -132,6 +136,7 @@ app.on('ready', () => {
   setTimeout(function() {
     mainWindow.loadURL('file://' + __dirname + '/index.html');
   }, 500)
+
 
   Menu.setApplicationMenu(Menu.buildFromTemplate(menu))
 
