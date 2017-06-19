@@ -27,7 +27,9 @@ export default class starterReactVR extends Component {
 
   navigateY(frameDeg, direction) {
     console.log('....navnavnavnavnavnavnavnav....')
-    let rotationY = VrHeadModel.rotationOfHeadMatrix()[1]*180/(Math.PI);
+    console.log('state.sceneRotateY', this.state.sceneRotateY);
+    
+    let rotationY = VrHeadModel.yawPitchRoll()[1];
     while(rotationY >= 360) rotationY-=360;
     while(rotationY < 0) rotationY+=360;
     let goTo = frameDeg + direction*90;
@@ -37,13 +39,22 @@ export default class starterReactVR extends Component {
     let updateSceneRotateY = this.state.sceneRotateY+degToRot;
     while(updateSceneRotateY >= 360) updateSceneRotateY-=360;
     while(updateSceneRotateY < 0) updateSceneRotateY+=360;
-
-    console.log('rotationY: ', rotationY);
+    
+    console.log('yawpitchroll: ', VrHeadModel.yawPitchRoll() )
+    console.log('rotation: ', VrHeadModel.rotation());
     console.log('frameDeg: ', frameDeg);
     console.log('goTo: ', goTo);
+    console.log('degToRot: ', degToRot);
     console.log('state.sceneRotateY', this.state.sceneRotateY);
+    console.log('updateSceneRotateY: ',updateSceneRotateY);
     
     this.setState({sceneRotateY: updateSceneRotateY});
+  }
+
+  componentDidMount(){
+    console.log('IN COMPONENTDIDMOUNT');
+    console.log('rot',VrHeadModel.rotation());
+    console.log('yawpitchroll: ', VrHeadModel.yawPitchRoll() )
   }
 
   navigateDown(frameDeg, direction) {
