@@ -8,8 +8,6 @@ export default class Nav extends Component {
     }
 
   render() {
-    console.log('in the nav render funtion');
-    console.log('props: ', this.props);
     let multiplier = this.props.direction === 'left' ? 1 : -1;
     return (
         <View style={{
