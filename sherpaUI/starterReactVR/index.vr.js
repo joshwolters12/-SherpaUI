@@ -6,13 +6,21 @@ import Nav from './nav.vr.js'
 const data = require('./myjsonfile.json');
 const width = 5;
 
+let frontRotation = [0,0,0];
+let rightRotation = [0, -90, 0];
+let backRotation = [-180, 0, -180];
+let leftRotation = [0, 90, 0];
+
+
 
 export default class starterReactVR extends Component {
   constructor() {
     super();
     this.state = data;
+    this.state.frameMovedUpFrom = [0,0,0];
     this.state.sceneRotateX = 0;
     this.state.sceneRotateY = 0;
+    this.state.sceneRotateZ = 0;
     if(data.currView === 'front') 
       this.state.sceneRotateY = 0;
     if(data.currView === 'right')
@@ -23,23 +31,46 @@ export default class starterReactVR extends Component {
       this.state.sceneRotateY = 90;
 
     this.navigateY = this.navigateY.bind(this);
+    this.navigate = this.navigate.bind(this);
   }
+
+  navigate(goTo) {
+
+    let currentRotation = VrHeadModel.yawPitchRoll(); 
+    let degreeToRotate = goTo.reduce((degreeToRotate, element, idx) => {
+      degreeToRotate.push(element - currentRotation[idx])
+      return degreeToRotate
+    }, [])
+    let updateObject = {//sceneRotateX: this.state.sceneRotateX + degreeToRotate[0],
+                        sceneRotateY: this.state.sceneRotateY + degreeToRotate[1],
+                        //sceneRotateZ: this.state.sceneRotateZ + degreeToRotate[2]  
+                      };
+    console.log('currentRotation: ', currentRotation)
+    console.log('goTo: ', goTo)
+    console.log('degreeToRotate: ', degreeToRotate)
+    console.log('updateObject: ', updateObject)
+    this.setState(updateObject)
+    
+
+  }
+
+
 
   navigateY(frameDeg, direction) {
     console.log('....navnavnavnavnavnavnavnav....')
     console.log('state.sceneRotateY', this.state.sceneRotateY);
     
     let rotationY = VrHeadModel.yawPitchRoll()[1];
-    while(rotationY >= 360) rotationY-=360;
-    while(rotationY < 0) rotationY+=360;
+    // while(rotationY >= 360) rotationY-=360;
+    // while(rotationY < 0) rotationY+=360;
     let goTo = frameDeg + direction*90;
-    while(goTo >= 360) goTo-=360;
-    while(goTo < 0) goTo+=360;
-    const degToRot = goTo - rotationY;
+    // while(goTo >= 360) goTo-=360;
+    // while(goTo < 0) goTo+=360;
+    let degToRot = goTo - rotationY;
     let updateSceneRotateY = this.state.sceneRotateY+degToRot;
-    while(updateSceneRotateY >= 360) updateSceneRotateY-=360;
-    while(updateSceneRotateY < 0) updateSceneRotateY+=360;
-    
+    // while(updateSceneRotateY >= 360) updateSceneRotateY-=360;
+    // while(updateSceneRotateY < 0) updateSceneRotateY+=360;
+   {
     console.log('yawpitchroll: ', VrHeadModel.yawPitchRoll() )
     console.log('rotation: ', VrHeadModel.rotation());
     console.log('frameDeg: ', frameDeg);
@@ -47,36 +78,35 @@ export default class starterReactVR extends Component {
     console.log('degToRot: ', degToRot);
     console.log('state.sceneRotateY', this.state.sceneRotateY);
     console.log('updateSceneRotateY: ',updateSceneRotateY);
-    
+   } 
     this.setState({sceneRotateY: updateSceneRotateY});
+  }
+
+//need to know rotation of frame to go to. currently saved to state. may change?
+  navigateDown() {
+    console.log('vv DOWNDOWNDOWN vv');
+  }
+  //need to take current frame and change the yaw, (x and z);
+  //eventually will put in a different component that will know the rotation array. 
+  naviagateUp(frameArr){
+    console.log('^^ UPUPUP ^^');
   }
 
   componentDidMount(){
     console.log('IN COMPONENTDIDMOUNT');
-    console.log('rot',VrHeadModel.rotation());
-    console.log('yawpitchroll: ', VrHeadModel.yawPitchRoll() )
+    let currRot = VrHeadModel.rotation();
+    let currYPR = VrHeadModel.yawPitchRoll();
+    console.log('current rotation: ', currRot);
+    console.log('current yawPitchRoll: ', currYPR);
   }
 
-  navigateDown(frameDeg, direction) {
-    console.log('....navnavnavnavnavnavnavnav....')
-    let rotationY = VrHeadModel.rotationOfHeadMatrix()[1]*180/(Math.PI);
-    while(rotationY >= 360) rotationY-=360;
-    while(rotationY < 0) rotationY+=360;
-    let goTo = frameDeg + direction*90;
-    while(goTo >= 360) goTo-=360;
-    while(goTo < 0) goTo+=360;
-    const degToRot = goTo - rotationY;
-    let updateSceneRotateY = this.state.sceneRotateY+degToRot;
-    while(updateSceneRotateY >= 360) updateSceneRotateY-=360;
-    while(updateSceneRotateY < 0) updateSceneRotateY+=360;
-
-    console.log('rotationY: ', rotationY);
-    console.log('frameDeg: ', frameDeg);
-    console.log('goTo: ', goTo);
-    console.log('state.sceneRotateY', this.state.sceneRotateY);
-    
-    this.setState({sceneRotateY: updateSceneRotateY});
+  printLocation() {
+    let currRot = VrHeadModel.rotation();
+    let currYPR = VrHeadModel.yawPitchRoll();
+    console.log('current rotation: ', currRot);
+    console.log('current yawPitchRoll: ', currYPR);
   }
+
 
   render() {
     return (
@@ -85,9 +115,47 @@ export default class starterReactVR extends Component {
                 transform: [ 
                   {rotateX: this.state.sceneRotateX},
                   {rotateY: this.state.sceneRotateY},
+                  {rotateZ: this.state.sceneRotateZ},
                 ]
             }}>
-        <View>
+          
+          {/*TEMP BUTTON*/}
+          <VrButton onClick={() => this.printLocation()}
+                    style={{
+                      transform: [
+                        {translate: [0,0,-5]},
+                      ]
+                    }}>
+            <Text>{'print location'}</Text>
+          </VrButton>
+          <VrButton onClick={() => this.printLocation()}
+                    style={{
+                      transform: [
+                        {translate: [0,0,5]},
+                        {rotateY: 180}
+                      ]
+                    }}>
+            <Text>{'print location'}</Text>
+          </VrButton>
+          <VrButton onClick={() => this.printLocation()}
+                    style={{
+                      transform: [
+                        {translate: [5,0,0]},
+                        {rotateY: -90}
+                      ]
+                    }}>
+            <Text>{'print location'}</Text>
+          </VrButton>
+          <VrButton onClick={() => this.printLocation()}
+                    style={{
+                      transform: [
+                        {translate: [-5,0,0]},
+                        {rotateY: 90}
+                      ]
+                    }}>
+            <Text>{'print location'}</Text>
+          </VrButton>
+          {/*TEMP BUTTON*/}
 
           <Pano source={asset(this.state.imageURL)}></Pano>
           
@@ -102,13 +170,15 @@ export default class starterReactVR extends Component {
           <Nav direction={'left'}
                 translate={[-width-.5, 0, -5]} 
                 rotateY={0}
-                rotateX={0}
-                navigateY={this.navigateY}/>
+                frameDegree = {[0,0,0]}
+                goTo = {[0, 90, 0]}
+                navigate={this.navigate}/>
           <Nav direction={'right'}
                 translate={[.5, 0, -5]} 
                 rotateY={0}
-                rotateX={0}
-                navigateY={this.navigateY}/>
+                frameDegree = {[0,0,0]}
+                goTo = {[0, -90, 0]}
+                navigate={this.navigate}/>
           {/*FRONT*/}
 
           {/*RIGHT*/}
@@ -172,7 +242,6 @@ export default class starterReactVR extends Component {
           {/*LEFT*/}
 
 
-        </View>
           {/*TOP*/}
           <View style={styles.container}>
             <Frame title={this.state.left.title}
@@ -190,7 +259,7 @@ export default class starterReactVR extends Component {
                   flexDirection: 'column',
                 }}
             >
-                <VrButton onClick={() => this.state.navigateDown}>
+                <VrButton onClick={() => this.navigateDown()}>
                     <Image source={asset(`arrowdown.png`)}
                         style={{ width: .4, 
                                 height: .4,
@@ -203,6 +272,7 @@ export default class starterReactVR extends Component {
             </View>
             {/*TEMP NAV DOWN BUTTON*/}
           {/*TOP*/}
+
       </Scene>
     )
   }
