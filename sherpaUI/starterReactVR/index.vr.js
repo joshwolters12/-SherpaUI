@@ -3,7 +3,8 @@ import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleShe
 import Frame from './frame.vr.js';
 import Nav from './nav.vr.js'
 
-const data = require('./starterReactVR/myjsonfile.json');
+var ls = require('local-storage');
+const data = require('./myjsonfile.json');
 const width = 5;
 
 
@@ -87,6 +88,7 @@ export default class starterReactVR extends Component {
   }
 
   render() {
+    console.log('GET!!!,', ls.get('path'))
     return (
 
       <Scene style={{

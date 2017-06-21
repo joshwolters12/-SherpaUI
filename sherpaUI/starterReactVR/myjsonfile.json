@@ -1,11 +1,20 @@
 {
   "projectName": "Sherpa Test2",
+<<<<<<< HEAD
   "imageURL": "winter-outdoor.jpg",
   "loadURL": "http://localhost:8081/vr/?14978986196611497899523946",
   "currView": "back",
   "front": {
     "title": "FRONT FRONT FRONTakjlsdlkdfjsdfsjkl",
     "text": "this is the front text",
+=======
+  "imageURL": "island-garden.jpg",
+  "loadURL": "http://localhost:8081/vr/?",
+  "currView": "front",
+  "front": {
+    "title": "Hello Hawaii",
+    "text": "this is the front text!?!",
+>>>>>>> d8130e8e2e3466eee9bf24f425e79ca1cc76913c
     "navleft": "Left",
     "navright": "Right"
   },
@@ -16,8 +25,13 @@
     "navright": "Left"
   },
   "left": {
+<<<<<<< HEAD
     "title": "LEFT LEFT LEFT",
     "text": "this is the left text\n\n\n\n\n\n\n\nbut does left frame like white space??? itdo",
+=======
+    "title": "WHATS UP CODESMITH",
+    "text": "this is the left text\n",
+>>>>>>> d8130e8e2e3466eee9bf24f425e79ca1cc76913c
     "navleft": "Back",
     "navright": "Front",
     "projectname": "Sherpa Test2"
