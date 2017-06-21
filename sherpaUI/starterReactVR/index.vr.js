@@ -3,7 +3,7 @@ import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleShe
 import Frame from './frame.vr.js';
 import Nav from './nav.vr.js'
 
-const data = require('./myjsonfile.json');
+const data = require('./starterReactVR/myjsonfile.json');
 const width = 5;
 
 
@@ -30,11 +30,15 @@ export default class starterReactVR extends Component {
     console.log('state.sceneRotateY', this.state.sceneRotateY);
 
     let rotationY = VrHeadModel.yawPitchRoll()[1];
+
     while (rotationY >= 360) rotationY -= 360;
     while (rotationY < 0) rotationY += 360;
+
     let goTo = frameDeg + direction * 90;
+
     while (goTo >= 360) goTo -= 360;
     while (goTo < 0) goTo += 360;
+
     const degToRot = goTo - rotationY;
     let updateSceneRotateY = this.state.sceneRotateY + degToRot;
     while (updateSceneRotateY >= 360) updateSceneRotateY -= 360;
