@@ -3,7 +3,7 @@ import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleShe
 import Frame from './frame.vr.js';
 import Nav from './nav.vr.js'
 
-var ls = require('local-storage');
+var RNFS = require('react-native-fs');
 const data = require('./myjsonfile.json');
 const width = 5;
 
@@ -88,7 +88,7 @@ export default class starterReactVR extends Component {
   }
 
   render() {
-    console.log('GET!!!,', ls.get('path'))
+    console.log(RNFS.DocumentDirectoryPath)
     return (
 
       <Scene style={{
