@@ -1,2 +1,2 @@
 # SherpaUI
-## A UI Templating tool for ReactVR
+### A UI Templating tool for ReactVR
