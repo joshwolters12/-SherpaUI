@@ -1,16 +1,16 @@
 {
   "projectName": "Sherpa Test2",
   "imageURL": "island-garden.jpg",
-  "loadURL": "http://localhost:8081/vr/?",
-  "currView": "front",
+  "loadURL": "http://localhost:8081/vr/?14981539616061498165483522",
+  "currView": "back",
   "front": {
-    "title": "Hello Hawaii",
-    "text": "this is the front text!?!",
+    "title": "Hello Hawaii 121212",
+    "text": "this is the front text!?! Hellooo",
     "navleft": "Left",
     "navright": "Right"
   },
   "back": {
-    "title": "BACK BACK BACK ",
+    "title": "BACK BACK BACK",
     "text": "this is new text",
     "navleft": "Right",
     "navright": "Left"

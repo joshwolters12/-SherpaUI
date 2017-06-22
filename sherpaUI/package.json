@@ -5,6 +5,7 @@
   "scripts": {
     "start": "electron -r babel-register . && node starterReactVR/node_modules/react-native/local-cli/cli.js start",
     "publish": "cd starterReactVR && npm run bundle",
+    "vr": "node starterReactVR/node_modules/react-native/local-cli/cli.js start",
     "dist": "build",
     "pack": "build --dir",
     "data": "node server.js"

@@ -4,14 +4,24 @@ import Gui from '../components/Gui';
 import Publish from '../components/Publish';
 import Open from '../components/Open';
 import Save from '../components/Save';
-
-
+import Store from './store'
 
 const exec = require('child_process').exec
 const fs = require('fs-extra');
-var data = require('../starterReactVR/myjsonfile.json');
+const path = require('path');
+let filePath = path.join(__dirname, '/../../../../../Library/Application\ Support/Sherpa-UI/user-preferences.json')
+var data = require(filePath);
 const dialog = require('electron').remote.dialog;
 const {BrowserWindow} = require('electron').remote
+
+
+const store = new Store({
+  // We'll call our data file 'user-preferences'
+  configName: 'user-preferences',
+  defaults: data
+    // 800x600 is the default size of our window
+});
+
 
 
 export default class Main extends Component {
@@ -30,17 +40,15 @@ export default class Main extends Component {
 
   selectPage(page) {
     let _this = this;
-    new Promise((resolve, reject) => {
+    new Promise((resolve,reject)=>{
       this.setState({
         currView: page
-      }, () => {
-        resolve()
-      });
-    }).then(() => {
-      fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state, null, 2), 'utf8', () => {
-        console.log('Writing Changes to File')
-      });
-    }).then(() => {
+      },()=>{resolve()});
+    }).then(()=>{
+      fs.writeFile(filePath, JSON.stringify(_this.state), function (err) {
+      console.log(err)
+    });
+    }).then(()=>{
       _this.setState({
         loadURL: _this.state.loadURL + Date.now()
       });
@@ -71,8 +79,8 @@ export default class Main extends Component {
   }
 
   writeToFile() {
-    fs.writeFile('./starterReactVR/myjsonfile.json', JSON.stringify(this.state, null, 2), 'utf8', () => {
-      console.log('Writing Changes to File')
+    fs.writeFile(filePath, JSON.stringify(this.state), function (err) {
+      console.log(err)
     });
     this.setState({
       loadURL: "http://localhost:8081/vr/?" + Date.now()
@@ -99,10 +107,10 @@ export default class Main extends Component {
         let pathLength = filePath[0].split("/").length;
         let pathMatch = filePath[0].split("/").slice(pathLength - 3, pathLength).join("/");
 
-        if (pathMatch !== 'starterReactVR/static_assets/' + imageToLoad) {
+        if (pathMatch !== 'static_assets/' + imageToLoad) {
           console.log('filePath', filePath)
-          console.log('saveURI', 'starterReactVR/static_assets/' + imageToLoad)
-          fs.copy(filePath.toString(), 'starterReactVR/static_assets/' + imageToLoad, function(err) {
+          console.log('saveURI', 'static_assets/' + imageToLoad)
+          fs.copy(filePath.toString(), 'static_assets/' + imageToLoad, function(err) {
             if (err) return console.log(err)
             resolve(imageToLoad)
           })
@@ -143,7 +151,7 @@ export default class Main extends Component {
       updateName={this.updateName}
       ></Gui>
         <div id="footer" style={styles.footer}></div>
-      </div>
+      </div >
       );
   }
 }

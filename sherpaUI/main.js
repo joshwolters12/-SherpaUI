@@ -6,11 +6,8 @@ const MenuItem = require('electron').MenuItem
 const shell = require('electron').shell;
 const exec = require('child_process').exec;
 const fs = require('fs-extra');
-const touch = require('touch');
 const defaultMenu = require('electron-default-menu');
-
-
-
+const server = require('./server.js')
 
 let mainWindow = null;
 
@@ -21,7 +18,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
-  exec('npm run data')
+  // exec('npm run data')
   const menu = defaultMenu(app, shell);
 
   menu.splice(1, 0, {

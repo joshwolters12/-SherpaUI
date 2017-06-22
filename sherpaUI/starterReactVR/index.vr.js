@@ -7,25 +7,23 @@ import Nav from './nav.vr.js'
 //const data = require('./myjsonfile.json');
 const width = 5;
 const axios = require('axios')
-
-
-
+const fakeData = require('./myjsonfile.json')
 
 export default class starterReactVR extends Component {
 
   constructor() {
     super();
 
-    this.state = {};
+    this.state = fakeData;
     this.state.sceneRotateX = 0;
     this.state.sceneRotateY = 0;
-    if (data.currView === 'front')
+    if (fakeData.currView === 'front')
       this.state.sceneRotateY = 0;
-    if (data.currView === 'right')
+    if (fakeData.currView === 'right')
       this.state.sceneRotateY = 270;
-    if (data.currView === 'back')
+    if (fakeData.currView === 'back')
       this.state.sceneRotateY = 180;
-    if (data.currView === 'left')
+    if (fakeData.currView === 'left')
       this.state.sceneRotateY = 90;
 
     this.navigateY = this.navigateY.bind(this);
@@ -63,18 +61,16 @@ export default class starterReactVR extends Component {
       sceneRotateY: updateSceneRotateY
     });
   }
-  componentWillMount() {
 
-    let _this = this
-    axios.get('http://localhost:8080/data').then(function(response) {
-      _this.setState(response.data)
-    })
-
-  }
   componentDidMount() {
     console.log('IN COMPONENTDIDMOUNT');
     console.log('rot', VrHeadModel.rotation());
     console.log('yawpitchroll: ', VrHeadModel.yawPitchRoll())
+    let _this = this
+    axios.get('http://localhost:8080/data').then(function (response) {
+      console.log('response',response.data)
+      _this.setState(response.data)
+    })
   }
 
   navigateDown(frameDeg, direction) {
@@ -117,99 +113,99 @@ export default class starterReactVR extends Component {
       }}>
 
 
-          <Pano source={asset(this.state.imageURL)}></Pano>
+        <Pano source={asset(this.state.imageURL)}></Pano>
 
-          { /*FRONT*/ }
-          <View style={styles.container}>
-            <Frame title={this.state.front.title}
-      text={this.state.front.text}
-      translate={[-width / 2, 1.5, -5]}
-      rotateY={0}
-      rotateX={0}/>
-          </View>
-          <Nav direction={'left'}
-      translate={[-width - .5, 0, -5]}
-      rotateY={0}
-      rotateX={0}
-      navigateY={this.navigateY}/>
-          <Nav direction={'right'}
-      translate={[.5, 0, -5]}
-      rotateY={0}
-      rotateX={0}
-      navigateY={this.navigateY}/>
-          { /*FRONT*/ }
+        { /*FRONT*/}
+        <View style={styles.container}>
+          <Frame title={this.state.front.title}
+            text={this.state.front.text}
+            translate={[-width / 2, 1.5, -5]}
+            rotateY={0}
+            rotateX={0} />
+        </View>
+        <Nav direction={'left'}
+          translate={[-width - .5, 0, -5]}
+          rotateY={0}
+          rotateX={0}
+          navigateY={this.navigateY} />
+        <Nav direction={'right'}
+          translate={[.5, 0, -5]}
+          rotateY={0}
+          rotateX={0}
+          navigateY={this.navigateY} />
+        { /*FRONT*/}
 
-          { /*RIGHT*/ }
-          <View style={styles.container}>
-            <Frame title={this.state.right.title}
-      text={this.state.right.text}
-      translate={[5 - width / 2, 1.5, 0]}
-      rotateY={270}
-      rotateX={0}/>
-          </View>
-          <Nav direction={'left'}
-      translate={[5 - width / 2, 0, -width / 2 - .5]}
-      rotateY={270}
-      rotateX={0}
-      navigateY={this.navigateY}/>
-          <Nav direction={'right'}
-      translate={[5 - width / 2, 0, width / 2 + .5]}
-      rotateY={270}
-      rotateX={0}
-      navigateY={this.navigateY}/>
-          { /*RIGHT*/ }
+        { /*RIGHT*/}
+        <View style={styles.container}>
+          <Frame title={this.state.right.title}
+            text={this.state.right.text}
+            translate={[5 - width / 2, 1.5, 0]}
+            rotateY={270}
+            rotateX={0} />
+        </View>
+        <Nav direction={'left'}
+          translate={[5 - width / 2, 0, -width / 2 - .5]}
+          rotateY={270}
+          rotateX={0}
+          navigateY={this.navigateY} />
+        <Nav direction={'right'}
+          translate={[5 - width / 2, 0, width / 2 + .5]}
+          rotateY={270}
+          rotateX={0}
+          navigateY={this.navigateY} />
+        { /*RIGHT*/}
 
-          { /*BACK*/ }
-          <View style={styles.container}>
-            <Frame title={this.state.back.title}
-      text={this.state.back.text}
-      translate={[-width / 2, 1.5, 5]}
-      rotateY={180}
-      rotateX={0}/>
-          </View>
-          <Nav direction={'left'}
-      translate={[.5, 0, 5]}
-      rotateY={180}
-      rotateX={0}
-      navigateY={this.navigateY}/>
-          <Nav direction={'right'}
-      translate={[-width - .5, 0, 5]}
-      rotateY={180}
-      rotateX={0}
-      navigateY={this.navigateY}/>
-          { /*BACK*/ }
+        { /*BACK*/}
+        <View style={styles.container}>
+          <Frame title={this.state.back.title}
+            text={this.state.back.text}
+            translate={[-width / 2, 1.5, 5]}
+            rotateY={180}
+            rotateX={0} />
+        </View>
+        <Nav direction={'left'}
+          translate={[.5, 0, 5]}
+          rotateY={180}
+          rotateX={0}
+          navigateY={this.navigateY} />
+        <Nav direction={'right'}
+          translate={[-width - .5, 0, 5]}
+          rotateY={180}
+          rotateX={0}
+          navigateY={this.navigateY} />
+        { /*BACK*/}
 
-          { /*LEFT*/ }
-          <View style={styles.container}>
-            <Frame title={this.state.left.title}
-      text={this.state.left.text}
-      translate={[-5 - width / 2, 1.5, 0]}
-      rotateY={90}
-      rotateX={0}/>
-          </View>
-          <Nav direction={'left'}
-      translate={[-5 - width / 2, 0, width / 2 + .5]}
-      rotateY={90}
-      rotateX={0}
-      navigateY={this.navigateY}/>
-          <Nav direction={'right'}
-      translate={[-5 - width / 2, 0, -width / 2 - .5]}
-      rotateY={90}
-      rotateX={0}
-      navigateY={this.navigateY}/>
-          { /*LEFT*/ }
+        { /*LEFT*/}
+        <View style={styles.container}>
+          <Frame title={this.state.left.title}
+            text={this.state.left.text}
+            translate={[-5 - width / 2, 1.5, 0]}
+            rotateY={90}
+            rotateX={0} />
+        </View>
+        <Nav direction={'left'}
+          translate={[-5 - width / 2, 0, width / 2 + .5]}
+          rotateY={90}
+          rotateX={0}
+          navigateY={this.navigateY} />
+        <Nav direction={'right'}
+          translate={[-5 - width / 2, 0, -width / 2 - .5]}
+          rotateY={90}
+          rotateX={0}
+          navigateY={this.navigateY} />
+        { /*LEFT*/}
 
 
-          { /*TOP*/ }
-          { /*<View style={styles.container}>
+        { /*TOP*/}
+        { /*<View style={styles.container}>
             <Frame title={this.state.left.title}
                    text={this.state.left.text}
                    translate={[-width/2, 5, 0]}
                    rotateY={0}
                    rotateX={90}/>
           </View>*/ }
-          { /*TEMP NAV DOWN BUTTON*/ }
-            { /*<View style={{
+        { /*TEMP NAV DOWN BUTTON*/}
+        { /*<View style={{
                   flex: 1,
                   position: 'absolute',
                   width: 5,
@@ -228,8 +224,8 @@ export default class starterReactVR extends Component {
                     />
                 </VrButton>
             </View>*/ }
-            { /*TEMP NAV DOWN BUTTON*/ }
-          { /*TOP*/ }
+        { /*TEMP NAV DOWN BUTTON*/}
+        { /*TOP*/}
 
       </Scene>
     )
