@@ -10,6 +10,8 @@ const touch = require('touch');
 const defaultMenu = require('electron-default-menu');
 
 
+
+
 let mainWindow = null;
 
 app.on('window-all-closed', () => {
@@ -19,17 +21,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
-
-  //TODO:   //check if jsonfile is in root directory
-  // fs.rename('./starterReactVR/myjsonfile.json', './starterReactVR/myjsonfile.json', function(err) {
-  //   if (err) return console.log(err)
-  // })
-
-
-
-
-
-
+  exec('npm run data')
   const menu = defaultMenu(app, shell);
 
   menu.splice(1, 0, {

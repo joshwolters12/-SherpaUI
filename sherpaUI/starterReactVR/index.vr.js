@@ -3,15 +3,20 @@ import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleShe
 import Frame from './frame.vr.js';
 import Nav from './nav.vr.js'
 
-var RNFS = require('react-native-fs');
-const data = require('./myjsonfile.json');
+
+//const data = require('./myjsonfile.json');
 const width = 5;
+const axios = require('axios')
+
+
 
 
 export default class starterReactVR extends Component {
+
   constructor() {
     super();
-    this.state = data;
+
+    this.state = {};
     this.state.sceneRotateX = 0;
     this.state.sceneRotateY = 0;
     if (data.currView === 'front')
@@ -27,8 +32,9 @@ export default class starterReactVR extends Component {
   }
 
   navigateY(frameDeg, direction) {
-    console.log('....navnavnavnavnavnavnavnav....')
-    console.log('state.sceneRotateY', this.state.sceneRotateY);
+    // console.log('....navnavnavnavnavnavnavnav....')
+    // console.log('state.sceneRotateY', this.state.sceneRotateY);
+
 
     let rotationY = VrHeadModel.yawPitchRoll()[1];
 
@@ -45,19 +51,26 @@ export default class starterReactVR extends Component {
     while (updateSceneRotateY >= 360) updateSceneRotateY -= 360;
     while (updateSceneRotateY < 0) updateSceneRotateY += 360;
 
-    console.log('yawpitchroll: ', VrHeadModel.yawPitchRoll())
-    console.log('rotation: ', VrHeadModel.rotation());
-    console.log('frameDeg: ', frameDeg);
-    console.log('goTo: ', goTo);
-    console.log('degToRot: ', degToRot);
-    console.log('state.sceneRotateY', this.state.sceneRotateY);
-    console.log('updateSceneRotateY: ', updateSceneRotateY);
+    // console.log('yawpitchroll: ', VrHeadModel.yawPitchRoll())
+    // console.log('rotation: ', VrHeadModel.rotation());
+    // console.log('frameDeg: ', frameDeg);
+    // console.log('goTo: ', goTo);
+    // console.log('degToRot: ', degToRot);
+    // console.log('state.sceneRotateY', this.state.sceneRotateY);
+    // console.log('updateSceneRotateY: ', updateSceneRotateY);
 
     this.setState({
       sceneRotateY: updateSceneRotateY
     });
   }
+  componentWillMount() {
 
+    let _this = this
+    axios.get('http://localhost:8080/data').then(function(response) {
+      _this.setState(response.data)
+    })
+
+  }
   componentDidMount() {
     console.log('IN COMPONENTDIDMOUNT');
     console.log('rot', VrHeadModel.rotation());
@@ -66,6 +79,7 @@ export default class starterReactVR extends Component {
 
   navigateDown(frameDeg, direction) {
     console.log('....navnavnavnavnavnavnavnav....')
+
     let rotationY = VrHeadModel.rotationOfHeadMatrix()[1] * 180 / (Math.PI);
     while (rotationY >= 360) rotationY -= 360;
     while (rotationY < 0) rotationY += 360;
@@ -88,7 +102,7 @@ export default class starterReactVR extends Component {
   }
 
   render() {
-    console.log(RNFS.DocumentDirectoryPath)
+
     return (
 
       <Scene style={{
