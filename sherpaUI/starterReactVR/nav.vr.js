@@ -18,7 +18,7 @@ export default class Nav extends Component {
                 flexDirection: 'column',
               }}
         >
-            <VrButton onClick={() => this.props.navigate(this.props.goTo)}>
+            <VrButton onClick={() => this.props.navigateY(this.props.rotateY, multiplier)}>
                 <Image source={asset(`arrow`+this.props.direction+`.png`)}
                     style={{ width: .4, 
                              height: .4,

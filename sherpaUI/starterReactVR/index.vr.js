@@ -60,15 +60,15 @@ export default class starterReactVR extends Component {
     console.log('state.sceneRotateY', this.state.sceneRotateY);
     
     let rotationY = VrHeadModel.yawPitchRoll()[1];
-    // while(rotationY >= 360) rotationY-=360;
-    // while(rotationY < 0) rotationY+=360;
+    while(rotationY >= 360) rotationY-=360;
+    while(rotationY < 0) rotationY+=360;
     let goTo = frameDeg + direction*90;
-    // while(goTo >= 360) goTo-=360;
-    // while(goTo < 0) goTo+=360;
+    while(goTo >= 360) goTo-=360;
+    while(goTo < 0) goTo+=360;
     let degToRot = goTo - rotationY;
     let updateSceneRotateY = this.state.sceneRotateY+degToRot;
-    // while(updateSceneRotateY >= 360) updateSceneRotateY-=360;
-    // while(updateSceneRotateY < 0) updateSceneRotateY+=360;
+    while(updateSceneRotateY >= 360) updateSceneRotateY-=360;
+    while(updateSceneRotateY < 0) updateSceneRotateY+=360;
    {
     console.log('yawpitchroll: ', VrHeadModel.yawPitchRoll() )
     console.log('rotation: ', VrHeadModel.rotation());
@@ -117,7 +117,7 @@ export default class starterReactVR extends Component {
                   {rotateZ: this.state.sceneRotateZ},
                 ]
             }}>
-          
+
           {/*TEMP BUTTON*/}
           <VrButton onClick={() => this.printLocation()}
                     style={{
@@ -171,13 +171,13 @@ export default class starterReactVR extends Component {
                 rotateY={0}
                 frameDegree = {[0,0,0]}
                 goTo = {[0, 90, 0]}
-                navigate={this.navigate}/>
+                navigateY={this.navigateY}/>
           <Nav direction={'right'}
                 translate={[.5, 0, -5]} 
                 rotateY={0}
                 frameDegree = {[0,0,0]}
                 goTo = {[0, -90, 0]}
-                navigate={this.navigate}/>
+                navigateY={this.navigateY}/>
           {/*FRONT*/}
 
           {/*RIGHT*/}
