@@ -51,7 +51,6 @@ export default class starterReactVR extends Component {
     console.log('updateObject: ', updateObject)
     this.setState(updateObject)
     
-
   }
 
 
