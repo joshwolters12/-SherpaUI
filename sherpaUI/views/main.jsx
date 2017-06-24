@@ -6,13 +6,16 @@ import Open from '../components/Open';
 import Save from '../components/Save';
 import Store from './store'
 
+const {BrowserWindow} = require('electron').remote
+const app =require('electron').remote.app
 const exec = require('child_process').exec
 const fs = require('fs-extra');
 const path = require('path');
-let filePath = path.join(__dirname, '/../../../../../Library/Application\ Support/Sherpa-UI/user-preferences.json')
+let filePath = app.getPath('userData') + '/user-preferences.json'
+console.log('filePath',filePath)
 var data = require(filePath);
 const dialog = require('electron').remote.dialog;
-const {BrowserWindow} = require('electron').remote
+
 
 
 const store = new Store({
