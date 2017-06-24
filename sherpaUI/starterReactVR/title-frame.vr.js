@@ -8,16 +8,21 @@ export default class TextFrame extends Component {
   render() {
     return (
       <View>
-        <View style={{ transform: [ {translate: [this.props.transformation.translate[0],
-                                                 this.props.transformation.translate[1]-1.25,
-                                                 this.props.transformation.translate[2]]}, 
-                                    {rotateY: this.props.transformation.rotateY} ], 
-                       backgroundColor: 'rgba(0, 0, 0, 0.3)'
-              }}>
+          <View style={{ flex: 1,
+                         position: 'absolute',
+                         width: 5,
+                         alignItems: 'center',
+                         flexDirection: 'column',
+                         backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                         transform: [ {translate: [ this.props.transformation.translate[0],
+                                                    this.props.transformation.translate[1]-.8,
+                                                    this.props.transformation.translate[2]]}, 
+                                      {rotateY: this.props.transformation.rotateY} ]
+                     }}>
 
           {/*TITLE*/}
           <Text style={{
-                  fontSize: .5,
+                  fontSize: .8,
                   color: 'white',
 
                       alignItems: 'center',
@@ -29,10 +34,10 @@ export default class TextFrame extends Component {
 
           {/*TEXT*/}
           <Text style={{
-                  fontSize: .2,
+                  fontSize: .4,
                   color: 'white',
                 }}>
-                {this.props.text}
+                {this.props.subtitle}
           </Text>
           {/*TEXT*/}
         </View>

@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
-import { AppRegistry, VrButton, NativeModules, asset, Pano, View, Text, StyleSheet, Scene, VrHeadModel, Image } from 'react-vr';
+import { AppRegistry, asset, Pano, View, Scene, VrHeadModel, Image } from 'react-vr';
 import TextFrame from './text-frame.vr.js';
 import TitleFrame from './title-frame.vr.js';
+import JumpButton from './jump-button.vr.js';
 
-const data = require('./myjsonfile.json');
+const data = require('./obj.json');
 
 
 export default class starterReactVR extends Component {
   constructor() {
     super();
     this.state = data;
-    this.state.sceneRotateY = 0;
+    this.state.sceneRotateY = data.currFrame === 'front' ? 0   :
+                              data.currFrame === 'right' ? 270 :
+                              data.currFrame === 'back'  ? 180 : 90;
+
     this.state.frontTransformation = {
       translate: [-2.5, 1.5, -5],
       leftTranslate: [-5.5, 0, -5],
@@ -35,18 +39,16 @@ export default class starterReactVR extends Component {
       rightTranslate: [-7.5, 0, -3],
       rotateY: 90
     }
-    if(data.currView === 'front') 
-      this.state.sceneRotateY = 0;
-    if(data.currView === 'right')
-      this.state.sceneRotateY = 270;
-    if(data.currView === 'back')
-      this.state.sceneRotateY = 180;
-    if(data.currView === 'left')
-      this.state.sceneRotateY = 90;
 
     this.navigateY = this.navigateY.bind(this);
+    this.changeScene = this.changeScene.bind(this);
   }
 
+  changeScene(scene) {
+    let newState = Object.assign({}, this.state);
+    newState.currScene = scene;
+    this.setState(newState);
+  }
 
   navigateY(frameDeg, direction) {
     let rotationY = VrHeadModel.yawPitchRoll()[1];
@@ -59,15 +61,6 @@ export default class starterReactVR extends Component {
     let updateSceneRotateY = this.state.sceneRotateY+degToRot;
     while(updateSceneRotateY >= 360) updateSceneRotateY-=360;
     while(updateSceneRotateY < 0) updateSceneRotateY+=360;
-   {
-    console.log('yawpitchroll: ', VrHeadModel.yawPitchRoll() )
-    console.log('rotation: ', VrHeadModel.rotation());
-    console.log('frameDeg: ', frameDeg);
-    console.log('goTo: ', goTo);
-    console.log('degToRot: ', degToRot);
-    console.log('state.sceneRotateY', this.state.sceneRotateY);
-    console.log('updateSceneRotateY: ',updateSceneRotateY);
-   } 
     this.setState({sceneRotateY: updateSceneRotateY});
   }
 
@@ -78,65 +71,61 @@ export default class starterReactVR extends Component {
   }
 
   render() {
+    {/*build jump buttons*/}
+    let jumpButtons = [];
+    let i = 0;
+    for(let key in this.state.scenes){
+      if(key !== this.state.currScene){
+        jumpButtons.push(
+          <JumpButton key={i}
+                      scene={key}
+                      changeScene={this.changeScene}
+                      imageURL={this.state.scenes[key].imageURL}/>
+        )
+      }
+      i++;
+    }
+    {/*build jump buttons*/}
+    
+    {/*build four frames*/}
+    let frames = [];
+    i = 0;
+    for(let key in this.state.scenes[this.state.currScene].frames){
+      let frame = this.state.scenes[this.state.currScene].frames[key];
+      if(frame.template === 'TitleFrame'){
+        frames.push(
+          <TitleFrame key={i}
+                      navigateY={this.navigateY}
+                      transformation={this.state[key+'Transformation']}
+                      title={this.state.scenes[this.state.currScene].frames[key].title}
+                      subtitle={this.state.scenes[this.state.currScene].frames[key].subtitle} 
+          />
+        )
+      }
+      else if(frame.template === 'TextFrame'){
+        frames.push(
+          <TextFrame key={i}
+                     navigateY={this.navigateY}
+                     transformation={this.state[key+'Transformation']}
+                     title={this.state.scenes[this.state.currScene].frames[key].title}
+                     text={this.state.scenes[this.state.currScene].frames[key].text} 
+          />
+        )
+      }
+      i++;
+    }
+    {/*build four frames*/}
+  
     return (
-
       <Scene style={{ transform: [{rotateY: this.state.sceneRotateY}] }}>
-          <Pano source={asset(this.state.imageURL)}></Pano>
-          
-          {/*FRONT*/}
-          <View style={styles.container}>
-            <TitleFrame navigateY={this.navigateY}
-                       title={this.state.front.title}
-                       text={this.state.front.text} 
-                       transformation={this.state.frontTransformation}
-            />
-          </View>
-          {/*FRONT*/}
+          <Pano source={asset(this.state.scenes[this.state.currScene].imageURL)}></Pano>
 
-          {/*RIGHT*/}
-          <View style={styles.container}>
-            <TextFrame navigateY={this.navigateY}
-                       title={this.state.right.title}
-                       text={this.state.right.text} 
-                       transformation={this.state.rightTransformation}
-            />
-          </View>
-
-          {/*RIGHT*/}
-
-          {/*BACK*/}
-          <View style={styles.container}>
-            <TextFrame navigateY={this.navigateY}
-                       title={this.state.back.title}
-                       text={this.state.back.text} 
-                       transformation={this.state.backTransformation}
-            />
-          </View>
-          {/*BACK*/}
-
-          {/*LEFT*/}
-          <View style={styles.container}>
-            <TextFrame navigateY={this.navigateY}
-                       title={this.state.left.title}
-                       text={this.state.left.text} 
-                       transformation={this.state.leftTransformation}
-            />
-          </View>
-          {/*LEFT*/}
+          {jumpButtons}
+          {frames}
 
       </Scene>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    position: 'absolute',
-    width: 5,
-    alignItems: 'center',
-    flexDirection: 'column',
-  }
-})
 
 AppRegistry.registerComponent('starterReactVR', () => starterReactVR);
